@@ -111,6 +111,7 @@ hr {
   width: 1px;
 }
 
-.hidden {
+.hidden,
+[hidden] {
   display: none !important;
 }

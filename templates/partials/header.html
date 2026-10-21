@@ -26,6 +26,7 @@
   <button
     aria-controls="search-popover"
     aria-expanded="false"
+    aria-haspopup="dialog"
     class="nav-button search-toggle"
     type="button"
   >Search <kbd>⌘K</kbd></button>
@@ -37,7 +38,7 @@
 </nav>
 
 {% if config.build_search_index %}
-<div class="search-popover hidden" id="search-popover">
+<div class="search-popover hidden" id="search-popover" role="dialog" aria-label="Search documentation" aria-modal="true">
   <div class="search-panel">
     <form class="search-form" role="search">
       <label class="visually-hidden" for="search">Search</label>
