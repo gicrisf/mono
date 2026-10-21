@@ -1,0 +1,143 @@
+@import "variables";
+
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__logo {
+    min-width: 0;
+  }
+
+  &__tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.menu {
+  margin-top: 1.25rem;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &--mobile {
+      display: none;
+    }
+
+    a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--fg);
+      }
+    }
+  }
+
+  &__sub-inner {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &-more {
+      position: absolute;
+      z-index: 50;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      min-width: 10rem;
+      margin: 0;
+      padding: 0.4rem;
+      list-style: none;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+      li {
+        margin: 0;
+      }
+
+      a {
+        display: block;
+        padding: 0.4rem 0.6rem;
+        border-radius: 4px;
+        white-space: nowrap;
+
+        &:hover {
+          background: var(--surface);
+        }
+      }
+    }
+
+    &-more-trigger {
+      color: var(--muted);
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        color: var(--fg);
+      }
+    }
+  }
+
+  @media (max-width: $phone-max-width) {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.5rem 0 0.75rem;
+    border-top: 1px solid var(--border);
+
+    &.open {
+      display: block;
+    }
+
+    &__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.1rem;
+
+      &--desktop {
+        display: none;
+      }
+
+      &--mobile {
+        display: flex;
+      }
+
+      li {
+        width: 100%;
+      }
+
+      a,
+      .menu__sub-inner-more-trigger {
+        display: block;
+        padding: 0.4rem 0;
+      }
+    }
+
+    &__sub-inner-more {
+      position: static;
+      margin: 0.25rem 0 0.5rem 1rem;
+      box-shadow: none;
+    }
+  }
+}

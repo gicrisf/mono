@@ -1,0 +1,40 @@
+{%- if config.build_search_index %}
+<script>
+(function () {
+    var toggle = document.querySelector('.search-toggle');
+    var popover = document.getElementById('search-popover');
+    var input = document.getElementById('search');
+    if (!toggle || !popover || !input) return;
+
+    toggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var closed = popover.classList.toggle('hidden');
+        toggle.setAttribute('aria-expanded', String(!closed));
+        if (!closed) input.focus();
+    });
+
+    popover.addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', function () {
+        if (!popover.classList.contains('hidden')) {
+            popover.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+})();
+</script>
+
+<script src="{{ get_url(path='assets/js/search.js', trailing_slash=false) }}"></script>
+<script defer src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false) }}"></script>
+{%- if config.default_language and config.default_language != "en" %}
+{%- set search_index_file = "search_index." ~ config.default_language ~ ".js" %}
+{%- set lunr_lang_file = "assets/js/lunr-languages/lunr." ~ config.default_language ~ ".min.js" %}
+<script defer src="{{ get_url(path='assets/js/lunr-languages/lunr.stemmer.support.min.js', trailing_slash=false) }}"></script>
+<script defer src="{{ get_url(path=lunr_lang_file, trailing_slash=false) }}"></script>
+<script defer src="{{ get_url(path=search_index_file, trailing_slash=false) }}"></script>
+{%- else %}
+<script defer src="{{ get_url(path='search_index.en.js', trailing_slash=false) }}"></script>
+{%- endif %}
+{%- endif %}

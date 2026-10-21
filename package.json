@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "serve": "zola serve",
+    "build": "zola build",
+    "check": "zola check"
+  }
+}

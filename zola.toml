@@ -1,0 +1,130 @@
+# The URL the site will be built for
+base_url = "/"
+
+# Used in feeds by default
+title = "White Canvas"
+description = "A clean, neutral Zola starter."
+
+# The default language, used in feeds and search
+default_language = "en"
+
+# Feed generation
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+# Compile Sass files in sass/
+compile_sass = true
+
+# Built-in taxonomies
+taxonomies = [
+  {name = "tags"},
+  {name = "categories"},
+]
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+insert_anchor_links = "right"
+
+[markdown.highlighting]
+# "class" lets the light/dark stylesheets be swapped by the theme switcher.
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[search]
+index_format = "elasticlunr_javascript"
+
+[extra]
+# Author name to be added to posts, if enabled.
+author = "Your Name"
+
+# Show author's name in blog post meta data.
+show_author = false
+
+# Show categories a blog post is marked with in its meta data.
+show_categories = true
+
+# Show tags a blog post is marked with in its meta data.
+show_tags = true
+
+# Show cover images in lists
+show_covers_in_lists = true
+
+# Custom css to add on top of the baseline. Place the file in static/.
+# custom_css = "custom.css"
+
+# External links styling: show an arrow on links outside internal_domains.
+external_links_styling = false
+internal_domains = []
+
+# How many menu items to show on desktop before using the "more" menu.
+show_menu_items = 2
+
+# Layout: full width, centered, or default.
+full_width = false
+center = false
+
+# Optional static/ assets.
+# favicon = "favicon.ico"
+# og_preview_img = "preview.png"
+
+# Copyright notice. Defaults to "© YEAR <site title>".
+# copyright = ""
+
+# What is displayed in the top left corner of the website.
+logo_text = "white canvas"
+
+# Link in logo. Defaults to the site base URL.
+logo_home_link = "/"
+
+# Menu items. `external = true` keeps the URL as-is.
+main_menu = [
+  {url = "/about/", name = "about"},
+  {url = "/contact/", name = "contact"},
+]
+
+menu_more = "more"
+
+read_more = "read more"
+read_post = "read post"
+
+# Optional post-page blocks. All are off in the baseline.
+support_us = false
+# support_us_prompt = "support this site"
+
+follow_me = false
+# follow_me_prompt = "follow along"
+
+url_to_clipboard = false
+# url_to_clipboard_prompt = "Copy this page URL to your clipboard"
+
+newsletter = false
+# newsletter_prompt = "newsletter"
+
+# Intra-post navigation.
+post_view_navigation = true
+# post_view_navigation_prompt = "read other posts"
+
+# Enable DuckDuckGo search. Only used when build_search_index is false.
+ddg_search = false
+# ddg_website = "example.com"
+# ddg_lang = "en-en"
+
+# Enable KaTeX. Pages opt in with `math = true` in [extra].
+enable_katex = true
+
+# Dark/light mode switcher.
+theme_switcher = false
+
+# Twitter card metadata
+twitter_site = ""
+twitter_user = ""
+
+# Disqus comments
+disqus = { enabled = false, short_name = "" }
+
+# Generate a Table of Contents for all articles. Individual articles can opt in
+# with `ToC = true` in [extra].
+# ToC = true

@@ -1,0 +1,112 @@
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            <a class="logo" href="{% if config.extra.logo_home_link %}{{ config.extra.logo_home_link }}{% else %}{{ config.base_url }}{% endif %}">
+                {{ config.extra.logo_text | default(value=config.title) }}
+            </a>
+        </div>
+
+        <div class="header__tools">
+            {%- if config.build_search_index %}
+            <button class="icon-button search-toggle" type="button" aria-label="Search" aria-expanded="false" aria-controls="search-popover">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                </svg>
+            </button>
+            {%- elif config.extra.ddg_search %}
+            <form class="search-form" role="search" action="//duckduckgo.com/" method="get">
+                {%- if config.extra.ddg_website %}
+                <input type="hidden" name="sites" value="{{ config.extra.ddg_website }}">
+                {%- else %}
+                <input type="hidden" name="sites" value="{{ config.base_url }}">
+                {%- endif %}
+                {%- if config.extra.ddg_lang %}
+                <input type="hidden" name="kl" value="{{ config.extra.ddg_lang }}">
+                {%- endif %}
+                <label class="visually-hidden" for="ddg-search">Search with DuckDuckGo</label>
+                <input id="ddg-search" type="search" name="q" placeholder="Search" maxlength="300" autocomplete="off">
+                <button class="icon-button" type="submit" aria-label="Search with DuckDuckGo">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                    </svg>
+                </button>
+            </form>
+            {%- endif %}
+
+            {%- if config.extra.theme_switcher %}
+            <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+                </svg>
+            </button>
+            {%- endif %}
+
+            {%- if config.extra.main_menu | length > 0 %}
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+            {%- endif %}
+        </div>
+    </div>
+
+    {%- if config.extra.main_menu | length > 0 %}
+    <nav class="menu" id="site-menu" aria-label="Main">
+        <ul class="menu__inner menu__inner--desktop">
+            {%- if config.extra.show_menu_items is defined %}
+            {%- set show_len = config.extra.show_menu_items %}
+            {%- for item in config.extra.main_menu[:show_len] %}
+            {%- if item.external is defined and item.external %}{% set url = item.url %}{% else %}{% set url = get_url(path=item.url, trailing_slash=true) %}{% endif %}
+            <li><a href="{{ url }}">{{ item.name }}</a></li>
+            {%- endfor %}
+            {%- if config.extra.main_menu | length > show_len %}
+            <li class="menu__sub-inner">
+                <button class="menu__sub-inner-more-trigger" type="button" aria-expanded="false">
+                    {{ config.extra.menu_more | default(value="more") }} ▾
+                </button>
+                <ul class="menu__sub-inner-more hidden">
+                    {%- for item in config.extra.main_menu[show_len:] %}
+                    {%- if item.external is defined and item.external %}{% set url = item.url %}{% else %}{% set url = get_url(path=item.url, trailing_slash=true) %}{% endif %}
+                    <li><a href="{{ url }}">{{ item.name }}</a></li>
+                    {%- endfor %}
+                </ul>
+            </li>
+            {%- endif %}
+            {%- else %}
+            {%- for item in config.extra.main_menu %}
+            {%- if item.external is defined and item.external %}{% set url = item.url %}{% else %}{% set url = get_url(path=item.url, trailing_slash=true) %}{% endif %}
+            <li><a href="{{ url }}">{{ item.name }}</a></li>
+            {%- endfor %}
+            {%- endif %}
+        </ul>
+
+        <ul class="menu__inner menu__inner--mobile">
+            {%- for item in config.extra.main_menu %}
+            {%- if item.external is defined and item.external %}{% set url = item.url %}{% else %}{% set url = get_url(path=item.url, trailing_slash=true) %}{% endif %}
+            <li><a href="{{ url }}">{{ item.name }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
+    {%- endif %}
+
+    {%- if config.build_search_index %}
+    <div class="search-popover hidden" id="search-popover">
+        <div class="search-container">
+            <form class="search-form" role="search">
+                <label class="visually-hidden" for="search">Search</label>
+                <input id="search" type="search" class="search-box" placeholder="Search" autocomplete="off">
+            </form>
+            <div class="search-results__not-found" hidden>
+                {%- if config.extra.search_not_found_message is defined %}
+                {{ config.extra.search_not_found_message }}
+                {%- else %}
+                No results found.
+                {%- endif %}
+            </div>
+            <div class="search-results" hidden>
+                <ul class="search-results__items"></ul>
+            </div>
+        </div>
+    </div>
+    {%- endif %}
+</header>

@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{%- block title -%}
+<title>#{{ term.name }} - {{ config.title }}</title>
+{%- endblock title -%}
+
+{%- block main -%}
+<article class="post">
+    <h1 class="post-title">
+        Posts tagged #{{ term.name }}
+        <small>({{ term.pages | length }} post{{ term.pages | length | pluralize }})</small>
+    </h1>
+
+    <ul>
+        {%- for post in term.pages -%}
+        <li class="tag-list">
+            <span class="post-date">{{ post.date | date(format="%Y.%m.%d") }}</span>
+            :: <a href="{{ post.permalink }}">{{ post.title }}</a>
+            {%- if post.taxonomies.tags is defined %} ::
+            {% for tag in post.taxonomies.tags -%}
+            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>{% if not loop.last %} {% endif %}
+            {%- endfor %}
+            {%- endif %}
+        </li>
+        {%- endfor -%}
+    </ul>
+</article>
+{%- endblock main -%}

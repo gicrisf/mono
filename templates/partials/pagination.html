@@ -1,0 +1,18 @@
+{%- if paginator is defined %}
+<div class="pagination">
+    <div class="pagination__buttons">
+        {%- if paginator.previous %}
+        <a class="button previous" href="{{ paginator.previous | safe }}" rel="prev">
+            <span class="button__icon">←</span>
+            <span class="button__text">newer</span>
+        </a>
+        {%- endif %}
+        {%- if paginator.next %}
+        <a class="button next" href="{{ paginator.next | safe }}" rel="next">
+            <span class="button__text">older</span>
+            <span class="button__icon">→</span>
+        </a>
+        {%- endif %}
+    </div>
+</div>
+{%- endif %}

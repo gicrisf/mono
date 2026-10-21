@@ -1,0 +1,29 @@
+{% extends "index.html" -%}
+
+{%- block title -%}
+    <title>Not Found - {{ config.title }}</title>
+{%- endblock title -%}
+
+{%- block main -%}
+<article class="post">
+    <h1 class="post-title">Page not found</h1>
+    <div class="post-content">
+        <p>
+            The page you requested could not be found.<br>
+            Try one of the links below, or use search.
+        </p>
+
+        {%- if config.extra.main_menu | length > 0 %}
+        <ul>
+            {%- for item in config.extra.main_menu %}
+            {%- if item.external is defined and item.external %}{% set url = item.url %}{% else %}{% set url = get_url(path=item.url, trailing_slash=true) %}{% endif %}
+            <li><a href="{{ url }}">{{ item.name }}</a></li>
+            {%- endfor %}
+        </ul>
+        {%- endif %}
+    </div>
+</article>
+{%- endblock main -%}
+
+{%- block pagination -%}
+{%- endblock pagination -%}

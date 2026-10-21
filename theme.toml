@@ -1,0 +1,11 @@
+name = "white-canvas"
+description = "A clean, neutral Zola starter"
+license = "MIT"
+homepage = "https://github.com/your-name/white-canvas"
+min_version = "0.23.0"
+
+[extra]
+
+[author]
+name = "Your Name"
+homepage = "https://example.com"

@@ -1,0 +1,29 @@
+{%- if config.extra.theme_switcher %}
+<script>
+(function () {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    var darkLink = document.getElementById('giallo-dark');
+    var lightLink = document.getElementById('giallo-light');
+
+    function apply(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try { localStorage.setItem('theme', theme); } catch (error) {}
+        if (darkLink) darkLink.disabled = theme !== 'dark';
+        if (lightLink) lightLink.disabled = theme === 'dark';
+        toggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    }
+
+    toggle.setAttribute(
+        'aria-pressed',
+        String(document.documentElement.getAttribute('data-theme') === 'dark')
+    );
+
+    toggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        apply(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+{%- endif %}
