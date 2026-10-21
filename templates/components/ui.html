@@ -1,0 +1,55 @@
+{% component ui.cards() %}
+<div class="cards">
+
+{{ body | safe }}
+
+</div>
+{% endcomponent ui.cards %}
+
+{% component ui.card(title, to, description = "") %}
+<div class="card">
+  <a class="card__link" href="{{ to | escape_html }}">
+    <span class="card__title">{{ title | escape_html }} <span aria-hidden="true">→</span></span>
+    {% if description %}<span class="card__description">{{ description | escape_html }}</span>{% endif %}
+  </a>
+</div>
+{% endcomponent ui.card %}
+
+{% component ui.tabs() %}
+<div class="tabs" data-tabs>
+
+{{ body | safe }}
+
+</div>
+{% endcomponent ui.tabs %}
+
+{% component ui.tab(title) %}
+<section class="tab" data-tab>
+  <h3 class="tab__title">{{ title | escape_html }}</h3>
+  <div class="tab__body">
+
+{{ body | safe }}
+
+  </div>
+</section>
+{% endcomponent ui.tab %}
+
+{% component ui.callout(tone = "note") %}
+{% set labels = {"caution": "Caution", "important": "Important", "note": "Note", "tip": "Tip", "warning": "Warning"} %}
+<aside class="callout callout--{{ tone | escape_html }}">
+  <span class="callout__label">{{ labels[tone] | default(value="Note") }}</span>
+  <div class="callout__content">
+
+{{ body | safe }}
+
+  </div>
+</aside>
+{% endcomponent ui.callout %}
+
+{% component ui.code_file(title = "") %}
+<div class="code-block"{% if title %} data-title="{{ title | escape_html }}"{% endif %}>
+
+{{ body | safe }}
+
+</div>
+{% endcomponent ui.code_file %}
