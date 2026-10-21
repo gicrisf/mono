@@ -43,6 +43,9 @@ main_menu = [
 
 github_url = "https://github.com/wevm/ondine"
 
+# Documentation section used by the sidebar and pager.
+docs_section = "docs"
+
 # Optional page action shown on documentation pages.
 edit_page = false
 docs_repo = "https://github.com/wevm/ondine"

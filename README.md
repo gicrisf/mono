@@ -1,13 +1,13 @@
-# white canvas
+# white-canvas
 
-A clean, neutral starting point for a [Zola](https://www.getzola.org/) theme.
+A documentation and blog theme for [Zola](https://www.getzola.org/), styled as a printed catalog. The layout follows the Ondine documentation site, with a paper sheet, boxed navigation, dotted rules, hard shadows, and monospace labels.
 
-## requirements
+## Requirements
 
 - Zola 0.23 or newer
 - No JavaScript build step
 
-## quick start
+## Quick Start
 
 ```sh
 npm run serve     # zola serve
@@ -15,152 +15,221 @@ npm run build     # zola build
 npm run check     # zola check
 ```
 
-Edit `zola.toml` first:
+## Install as a Theme
 
-```toml
-base_url = "https://example.com"
-title = "My site"
-description = "What this site is about."
+Place this repository under your site's `themes` directory.
 
-[extra]
-author = "Your Name"
-logo_text = "my site"
-main_menu = [
-  {url = "/about/", name = "about"},
-  {url = "/contact/", name = "contact"},
-]
+```sh
+git clone <theme-url> themes/white-canvas
 ```
 
-Then replace the demo content in `content/` and the styles in `sass/`.
+Set the theme in your site's `zola.toml`.
 
-## what is included
+```toml
+theme = "white-canvas"
+```
+
+Copy the `[extra]` values from this repository's `zola.toml`, then change the title, menu, and footer for your site.
+
+## Configuration
+
+Theme behavior lives under `[extra]`.
+
+```toml
+[extra]
+logo_text = "Ondine"
+logo_home_link = "/"
+github_url = "https://github.com/wevm/ondine"
+docs_section = "docs"
+
+main_menu = [
+  {url = "/docs/", name = "Docs", section = "docs"},
+  {url = "/blog/", name = "Blog", section = "blog"},
+]
+
+edit_page = false
+docs_repo = "https://github.com/wevm/ondine"
+repo_branch = "main"
+
+copyright = 'Ondine · <a href="https://github.com/wevm/ondine/blob/main/LICENSE">MIT License</a>'
+```
+
+The optional `section` value on a menu entry marks the entry as current when `current_path` starts with the entry URL. If it is omitted, the entry is never marked as current.
+
+Set `edit_page = true` to show an edit link on documentation pages. The link uses `docs_repo` and `repo_branch`.
+
+Enable Zola's search index in the site configuration.
+
+```toml
+build_search_index = true
+```
+
+## Documentation Content
+
+A documentation section sets `template` and `page_template` in its `_index.md`.
+
+```toml
++++
+title = "Docs"
+description = "Install, configure, and build with the theme."
+template = "docs/section.html"
+page_template = "docs/page.html"
+sort_by = "weight"
+weight = 1
++++
+```
+
+Nest sections for grouped navigation. The sidebar renders each subsection as a group and each nested subsection as a collapsible topic.
+
+Documentation pages use these optional values.
+
+| Value | Purpose |
+| --- | --- |
+| `weight` | Sidebar and pager order within the section |
+| `[extra] lead` | Article subtitle, rendered as HTML |
+| `[extra] toc` | Show the outline. Defaults to true |
+| `[extra] top` | Mark the first page and suppress its previous link |
+
+The previous and next pager crosses section and subsection boundaries.
+
+## Blog Content
+
+A blog section sets the list template, article template, date sorting, and page size.
+
+```toml
++++
+title = "Blog"
+description = "Short notes about the theme."
+template = "blog/section.html"
+page_template = "blog/page.html"
+sort_by = "date"
+paginate_by = 5
++++
+```
+
+Posts use Zola's `date`, `description`, and `taxonomies` values. Tags and categories reuse the theme's article typography.
+
+## Components
+
+Components are Tera 2 components. Zola renders them before it parses Markdown, so component bodies can contain Markdown, lists, tables, and fenced code.
+
+### Cards
+
+```markdown
+{% <ui.cards> %}
+{{<ui.card title="Getting Started" to="/docs/introduction/getting-started/" description="Install the theme and render a first page." />}}
+{{<ui.card title="Theming" to="/docs/guides/theming/" description="Change the palette and typography." />}}
+{% </ui.cards> %}
+```
+
+### Tabs
+
+````markdown
+{% <ui.tabs> %}
+{% <ui.tab title="Zola"> %}
+Build the site.
+
+```sh
+zola build
+```
+{% </ui.tab> %}
+{% <ui.tab title="Serve"> %}
+Preview the site.
+
+```sh
+zola serve
+```
+{% </ui.tab> %}
+{% </ui.tabs> %}
+````
+
+Tabs work without JavaScript. The script adds a tablist and keyboard navigation when it loads.
+
+### Callouts
+
+```markdown
+{% <ui.callout tone="tip"> %}
+The callout body supports **Markdown**.
+{% </ui.callout> %}
+```
+
+Tones are `note`, `tip`, `warning`, `caution`, and `important`.
+
+### Labeled Code Blocks
+
+````markdown
+{% <ui.code_file title="zola.toml"> %}
+```toml
+build_search_index = true
+```
+{% </ui.code_file> %}
+````
+
+Every code block receives a language label and a copy button. A labeled block uses the filename instead.
+
+## Styling
+
+The design tokens are CSS custom properties in `sass/_tokens.scss`. Override them in a custom stylesheet.
+
+```css
+:root {
+  --color-desk: #f4f1e8;
+  --color-paper: #fffdf6;
+  --color-accent: #0047ab;
+}
+```
+
+Set `custom_css` in `[extra]` to load the file.
+
+```toml
+[extra]
+custom_css = "custom.css"
+```
+
+The theme ships IBM Plex Mono 400, 500, and 700 as the fallback monospace face. The sans-serif stack uses the system fonts available to the reader.
+
+## JavaScript
+
+All scripts are progressive enhancements and ship as plain files.
+
+- `code.js` adds language labels and copy buttons to code blocks.
+- `tabs.js` adds the tablist and keyboard behavior.
+- `search.js` opens the search panel with `/` or `Cmd/Ctrl+K`, then handles arrow keys, Enter, and Escape.
+- `outline.js` marks the current documentation heading.
+
+## Files
 
 ```
 templates/
-  index.html              base template with overridable blocks
-  page.html               article template
-  section.html            section template
-  404.html                not-found page
-  tags/, categories/      taxonomy templates
-  partials/               head, header, list, article, post meta, covers,
-                          pagination, search, theme switcher, comments
-  components/             Tera components: toc, youtube, twitter/x
-  snippets/               editable support/follow/newsletter blocks
+  index.html              page shell
+  home.html               landing page
+  page.html               generic page
+  section.html            generic section
+  docs/                   documentation layouts
+  blog/                   blog layouts
+  components/             docs navigation and UI components
+  partials/               head, header, footer, search, pager
 sass/
-  _tokens.scss            color, type, spacing, and width tokens
-  _main.scss              reset and base content styles
-  _header.scss            header, menu, responsive navigation
-  _post.scss              article and list styles
-  _pagination.scss        pagination styles
-  _footer.scss            footer styles
-  _search.scss, _toc.scss, _buttons.scss, _after_page.scss
-static/assets/
-  js/menu.js              mobile menu and submenu behavior
-  js/search.js            elasticlunr results rendering
-  katex/                  KaTeX assets
-  js/lunr-languages/      search stemmers
+  _tokens.scss            colors, fonts, spacing, shadows
+  _main.scss              reset and base elements
+  _shell.scss             sheet, masthead, navigation, footer
+  _home.scss              landing page
+  _prose.scss             article typography
+  _docs.scss              documentation layout
+  _blog.scss              blog list and pagination
+  _components.scss        cards, tabs, callouts, code blocks
+  _search.scss            search panel
+static/
+  assets/js/              progressive enhancement scripts
+  fonts/                  self-hosted IBM Plex Mono
 ```
 
-## component map
+## Notes
 
-The partial and component boundaries are the API. Replace one without touching
-the rest of the templates:
+- The theme targets Zola 0.23 and Tera 2 components. It does not use shortcodes.
+- Wrap literal `{{` or `{%` in a code sample with `{% raw %}` and `{% endraw %}`.
+- Diagrams, a browser playground, MDX, and generated social images are not part of this theme.
 
-| Component | File |
-| --- | --- |
-| Head, SEO, feeds, KaTeX | `templates/partials/head.html` |
-| Header, tools, menu | `templates/partials/header.html` |
-| Post list | `templates/partials/list.html` |
-| Article | `templates/partials/article.html` |
-| Post metadata, tags, translations | `templates/partials/post_meta.html` |
-| Cover images | `templates/partials/cover.html` |
-| Pagination | `templates/partials/pagination.html`, `pagination_page.html` |
-| Search | `templates/partials/header.html`, `search_script.html` |
-| Theme switcher | `templates/partials/theme_init.html`, `theme_script.html` |
-| Comments | `templates/partials/comments.html` |
-| Table of contents | `templates/components/toc.html` |
-| YouTube / Twitter | `templates/components/` |
-| Support / follow / newsletter | `templates/snippets/` |
+## License
 
-`templates/index.html` exposes blocks for `title`, `main`, `pagination`,
-`copyright`, and `script`. Add site-wide header markup in
-`templates/partials/extended_header.html` and footer markup in
-`templates/partials/extended_footer.html`.
-
-Zola 0.23 uses Tera 2, where macros were replaced by components. The baseline
-uses includes for context-aware layout fragments and components for
-parameterized pieces such as the table of contents and shortcodes.
-
-## styling
-
-- Defaults are light: white background, neutral text, system fonts.
-- `sass/_tokens.scss` holds all design tokens. Override them there or in a
-  `static/custom.css` file referenced by `custom_css`.
-- A matching dark token set is included under `[data-theme="dark"]`.
-- No web fonts are required. Replace `--font-sans` / `--font-mono` to change
-  typography.
-- Code highlighting uses Zola's Giallo themes in CSS-class mode. The generated
-  `giallo-light.css` / `giallo-dark.css` files are linked from `head::styling`.
-
-## optional features
-
-All optional integrations are off by default, except KaTeX (the demo includes a
-math page). Enable them in `[extra]`:
-
-```toml
-theme_switcher = true       # light/dark toggle; remembers the choice
-ddg_search = true           # DuckDuckGo form in the header
-enable_katex = true         # pages opt in with math = true
-support_us = true           # post-page snippet
-follow_me = true            # post-page snippet
-url_to_clipboard = true     # copy-page-URL block
-newsletter = true           # newsletter snippet
-post_view_navigation = true # previous/next post links
-show_author = false         # show author in post metadata
-show_categories = true      # show categories in post metadata
-show_tags = true            # show tags in post metadata
-show_covers_in_lists = true # show cover images in lists
-```
-
-### search
-
-Set `build_search_index = true` in `zola.toml`. The baseline includes the
-elasticlunr client and the search UI. For a non-English site, set
-`default_language`; the matching Lunr stemmer is loaded automatically.
-
-### DuckDuckGo
-
-Set `ddg_search = true`. This renders a plain form and does not require
-JavaScript.
-
-### shortcodes
-
-Zola 0.23 shortcodes are Tera components. Call them from Markdown with the
-component syntax:
-
-```markdown
-{{<youtube id="9Gj47G2e1Jc" />}}
-{{<twitter id="1085870671291310081" />}}
-```
-
-### table of contents
-
-Enable globally with `ToC = true` in `[extra]`, or per page with:
-
-```toml
-[extra]
-ToC = true
-```
-
-### comments
-
-```toml
-[extra]
-disqus = { enabled = true, short_name = "your-short-name" }
-```
-
-### support / follow / newsletter
-
-Enable the relevant flag and edit the matching file in `templates/snippets/`.
-
-MIT licensed. See `LICENSE.md`.
+MIT. See `LICENSE.md`.
