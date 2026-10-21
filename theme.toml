@@ -1,7 +1,8 @@
 name = "white-canvas"
-description = "A clean, neutral Zola starter"
+description = "A documentation and blog theme for Zola, styled as a printed catalog."
 license = "MIT"
 homepage = "https://github.com/your-name/white-canvas"
+demo = "https://example.com"
 min_version = "0.23.0"
 
 [extra]
