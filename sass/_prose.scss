@@ -1,0 +1,160 @@
+@import "tokens";
+
+.page-single {
+  margin-inline: auto;
+  max-width: var(--article-width);
+  min-width: 0;
+}
+
+.page-header {
+  border-bottom: 1px dashed var(--color-rule);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+
+  h1 {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+}
+
+.page-lede {
+  color: var(--color-muted);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-top: var(--space-sm);
+}
+
+.prose {
+  font-size: 1rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+
+  h2 {
+    border-bottom: 1px dashed var(--color-rule);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-2xl);
+    padding-bottom: var(--space-xs);
+    scroll-margin-top: var(--space-md);
+  }
+
+  h3 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-xl);
+    scroll-margin-top: var(--space-md);
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    margin-top: var(--space-lg);
+  }
+
+  p,
+  ul,
+  ol {
+    line-height: 1.7;
+    margin-block: var(--space-md);
+  }
+
+  ul,
+  ol {
+    padding-left: var(--space-lg);
+  }
+
+  ul {
+    list-style-type: square;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    margin-block: var(--space-xs);
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  :is(p, li, td, th, a, strong, h2, h3, h4) > code {
+    background: var(--color-tint);
+    border: 1px dotted var(--color-faint);
+    font-size: 0.875em;
+    padding-inline: 3px;
+  }
+
+  pre {
+    background: var(--color-tint);
+    border: 1px solid var(--color-rule);
+    color: var(--color-code);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: auto;
+    padding-block: var(--space-md);
+    padding-inline: var(--space-md);
+  }
+
+  pre code {
+    display: block;
+    font: inherit;
+    min-width: max-content;
+  }
+
+  table {
+    border-collapse: collapse;
+    display: block;
+    font-size: 0.875rem;
+    margin-block: var(--space-lg);
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--color-rule);
+    padding-block: var(--space-xs);
+    padding-inline: var(--space-sm);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--color-tint);
+    font-family: var(--font-mono);
+  }
+
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+
+  blockquote {
+    border-left: 2px solid var(--color-rule);
+    color: var(--color-muted);
+    margin-block: var(--space-lg);
+    padding-left: var(--space-md);
+  }
+
+  .zola-anchor {
+    color: var(--color-muted);
+    margin-left: 0.4em;
+    opacity: 0;
+    text-decoration: none;
+  }
+
+  :is(h2, h3, h4):hover .zola-anchor,
+  .zola-anchor:focus-visible {
+    opacity: 1;
+  }
+}

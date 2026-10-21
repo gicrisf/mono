@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block main %}
+<section class="home-hero">
+  <div class="home-copy">
+    <p class="home-kicker">{{ section.extra.kicker | default(value="Documentation and blog") }}</p>
+    <h1>{{ section.title | default(value=config.title) }}</h1>
+
+    {% if section.extra.lead %}
+    <p class="home-lede">{{ section.extra.lead | safe }}</p>
+    {% endif %}
+
+    <p class="home-calls">
+      {% if section.extra.primary_url %}
+      <a class="button-primary" href="{{ section.extra.primary_url }}">{{ section.extra.primary_label | default(value="Get Started →") }}</a>
+      {% else %}
+      <a class="button-primary" href="{{ get_url(path='docs', trailing_slash=true) }}">{{ section.extra.primary_label | default(value="Get Started →") }}</a>
+      {% endif %}
+
+      {% if section.extra.secondary_url %}
+      <a class="button-secondary" href="{{ section.extra.secondary_url }}">{{ section.extra.secondary_label | default(value="Read the Blog →") }}</a>
+      {% else %}
+      <a class="button-secondary" href="{{ get_url(path='blog', trailing_slash=true) }}">{{ section.extra.secondary_label | default(value="Read the Blog →") }}</a>
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="home-plate" aria-hidden="true">
+    <div class="home-plate__chain">{% include "partials/shell/chain.html" %}</div>
+    <div class="home-plate__commits">{% include "partials/shell/commits.html" %}</div>
+    <p class="home-plate__caption">source → compile → svg</p>
+  </div>
+</section>
+
+<div class="home-content">
+  {{ section.content | safe }}
+</div>
+{% endblock main %}

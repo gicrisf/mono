@@ -1,84 +1,53 @@
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{% if section is defined %}{% if section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}{% elif page is defined %}{% if page.description %}{{ page.description }}{% elif page.summary %}{{ page.summary | striptags | truncate(length=200) }}{% else %}{{ config.description }}{% endif %}{% else %}{{ config.description }}{% endif %}">
 
-{%- if page is defined and page.taxonomies is defined and (page.taxonomies.tags or page.taxonomies.categories) -%}
-<meta name="keywords" content="{% if page.taxonomies.categories %}{% for cat in page.taxonomies.categories %}{{ cat }}, {% endfor %}{% endif %}{% if page.taxonomies.tags %}{% for tag in page.taxonomies.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}">
-{%- endif %}
+{% set page_title = config.title %}
+{% set description = config.description %}
+{% set canonical = config.base_url %}
 
-<meta property="og:title" content="{{ config.title }}{% if page is defined %} - {{ page.title | striptags }}{% elif section is defined and section.title %} - {{ section.title | striptags }}{% endif %}">
-<meta property="og:type" content="website">
-<meta property="og:description" content="{{ config.description }}">
-{%- if current_url is defined %}
-<meta property="og:url" content="{{ current_url }}">
-{%- endif %}
-{%- if page is defined and page.extra.og_image is defined %}
-<meta property="og:image" content="{{ current_url ~ page.extra.og_image }}">
-{%- elif page is defined and page.extra.cover_image is defined %}
-<meta property="og:image" content="{{ current_url ~ page.extra.cover_image }}">
-{%- elif config.extra.og_preview_img is defined %}
-<meta property="og:image" content="{{ get_url(path=config.extra.og_preview_img) }}">
-{%- endif %}
+{% if page is defined %}
+  {% set page_title = page.title ~ " · " ~ config.title %}
+  {% set description = page.description | default(value=config.description) %}
+  {% set canonical = page.permalink %}
+{% elif section is defined and section.path != "/" %}
+  {% set page_title = section.title ~ " · " ~ config.title %}
+  {% set description = section.description | default(value=config.description) %}
+  {% set canonical = section.permalink %}
+{% endif %}
 
-{%- if page is defined and page.extra.cover_image is defined %}
-<meta name="twitter:card" content="summary_large_image">
-{%- if page.extra.cover_caption is defined %}
-<meta name="twitter:image:alt" content="{{ page.extra.cover_caption }}">
-{%- endif %}
-{%- else %}
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ canonical }}">
+
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:type" content="{% if page is defined %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="{{ config.title }}">
+{% if page is defined and page.date %}
+<meta property="article:published_time" content="{{ page.date }}">
+{% endif %}
 <meta name="twitter:card" content="summary">
-{%- endif %}
-{%- if config.extra.twitter_site %}
-<meta name="twitter:site" content="{{ config.extra.twitter_site }}">
-{%- endif %}
-{%- if page is defined and page.extra.twitter_user is defined %}
-<meta name="twitter:creator" content="{{ page.extra.twitter_user }}">
-{%- elif config.extra.twitter_user %}
-<meta name="twitter:creator" content="{{ config.extra.twitter_user }}">
-{%- endif %}
+<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:description" content="{{ description }}">
 
-{%- if config.generate_feeds %}
-{%- for feed in config.feed_filenames %}
-<link rel="alternate" type="{% if feed == "atom.xml" %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="{{ config.title }} feed" href="{{ get_url(path=feed) }}">
-{%- endfor %}
-{%- endif %}
+{% if config.extra.favicon %}
+<link rel="icon" href="{{ get_url(path=config.extra.favicon) }}" type="image/svg+xml">
+{% endif %}
 
-<link rel="stylesheet" href="{{ get_url(path="style.css", cachebust=true) }}">
-{%- if config.markdown.highlighting is defined and config.markdown.highlighting.style == "class" %}
-{%- if config.markdown.highlighting.light_theme is defined and config.markdown.highlighting.dark_theme is defined %}
-<link id="giallo-light" rel="stylesheet" href="{{ get_url(path="giallo-light.css", cachebust=true) }}">
-<link id="giallo-dark" rel="stylesheet" href="{{ get_url(path="giallo-dark.css", cachebust=true) }}" disabled>
-{%- else %}
-<link id="giallo" rel="stylesheet" href="{{ get_url(path="giallo.css", cachebust=true) }}">
-{%- endif %}
-{%- endif %}
-{%- if config.extra.custom_css is defined %}
+<link rel="preload" as="font" href="{{ get_url(path='fonts/ibm-plex-mono-latin-400-normal.woff2') }}" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
+
+{% if config.markdown.highlighting.style == "class" %}
+<link rel="stylesheet" href="{{ get_url(path='giallo-light.css', cachebust=true) }}">
+{% endif %}
+
+{% if config.extra.custom_css %}
 <link rel="stylesheet" href="{{ get_url(path=config.extra.custom_css, cachebust=true) }}">
-{%- endif %}
-{%- if config.extra.favicon is defined %}
-<link rel="shortcut icon" href="{{ get_url(path=config.extra.favicon) }}" type="image/x-icon">
-{%- endif %}
+{% endif %}
 
-{%- if config.extra.external_links_styling %}
-<style>
-a[href^="https://"]:not([href^="#"]):not([href^="/"]){% for domain in config.extra.internal_domains %}:not([href*="{{ domain }}"]){% endfor %}::after {
-  content: " ↗";
-  font-size: 0.85em;
-}
-</style>
-{%- endif %}
-
-{%- if page is defined and page.extra.math is defined and page.extra.math and config.extra.enable_katex %}
-<link rel="stylesheet" href="{{ get_url(path="assets/katex/katex.min.css") }}">
-<script defer src="{{ get_url(path="assets/katex/katex.min.js") }}"></script>
-<script defer src="{{ get_url(path="assets/katex/mathtex-script-type.min.js") }}"></script>
-<script defer src="{{ get_url(path="assets/katex/auto-render.min.js") }}"
-    onload="renderMathInElement(document.body, {
-        delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false},
-            {left: '\\(', right: '\\)', display: false},
-            {left: '\\[', right: '\\]', display: true}
-        ]
-    });"></script>
-{%- endif %}
+{% if config.generate_feeds %}
+{% for feed in config.feed_filenames %}
+<link rel="alternate" type="{% if feed == 'atom.xml' %}application/atom+xml{% else %}application/rss+xml{% endif %}" title="{{ config.title }} feed" href="{{ get_url(path=feed) }}">
+{% endfor %}
+{% endif %}

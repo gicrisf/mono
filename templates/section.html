@@ -1,9 +1,34 @@
-{% extends "index.html" -%}
+{% extends "index.html" %}
 
-{%- block title -%}
-    <title>{{ section.title }} - {{ config.title }}</title>
-{%- endblock title -%}
+{% block main %}
+<article class="page-single">
+  <header class="page-header">
+    <h1>{{ section.title | default(value=config.title) }}</h1>
+    {% if section.description %}
+    <p class="page-lede">{{ section.description }}</p>
+    {% endif %}
+  </header>
 
-{%- block main -%}
-{% include "partials/section.html" %}
-{%- endblock main -%}
+  {% if section.content %}
+  <div class="prose">
+    {{ section.content | safe }}
+  </div>
+  {% endif %}
+
+  {% if section.pages %}
+  <div class="post-list">
+    {% for entry in section.pages %}
+    <article class="post-list__item">
+      {% if entry.date %}
+      <time datetime="{{ entry.date }}">{{ entry.date | date(format="%Y.%m.%d") }}</time>
+      {% endif %}
+      <h2><a href="{{ entry.permalink }}">{{ entry.title }}</a></h2>
+      {% if entry.description %}
+      <p>{{ entry.description }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
+{% endblock main %}

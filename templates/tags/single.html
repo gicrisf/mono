@@ -1,28 +1,21 @@
 {% extends "index.html" %}
 
-{%- block title -%}
-<title>#{{ term.name }} - {{ config.title }}</title>
-{%- endblock title -%}
+{% block main %}
+<article class="page-single">
+  <header class="page-header">
+    <h1>Posts tagged #{{ term.name }}</h1>
+    <p class="page-lede">{{ term.pages | length }} post{{ term.pages | length | pluralize }}</p>
+  </header>
 
-{%- block main -%}
-<article class="post">
-    <h1 class="post-title">
-        Posts tagged #{{ term.name }}
-        <small>({{ term.pages | length }} post{{ term.pages | length | pluralize }})</small>
-    </h1>
-
+  <div class="prose">
     <ul>
-        {%- for post in term.pages -%}
-        <li class="tag-list">
-            <span class="post-date">{{ post.date | date(format="%Y.%m.%d") }}</span>
-            :: <a href="{{ post.permalink }}">{{ post.title }}</a>
-            {%- if post.taxonomies.tags is defined %} ::
-            {% for tag in post.taxonomies.tags -%}
-            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>{% if not loop.last %} {% endif %}
-            {%- endfor %}
-            {%- endif %}
-        </li>
-        {%- endfor -%}
+      {% for post in term.pages %}
+      <li>
+        {% if post.date %}<time datetime="{{ post.date }}">{{ post.date | date(format="%Y.%m.%d") }}</time> :: {% endif %}
+        <a href="{{ post.permalink }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
     </ul>
+  </div>
 </article>
-{%- endblock main -%}
+{% endblock main %}

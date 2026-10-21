@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <span>
+    {% if config.extra.copyright %}
+      {{ config.extra.copyright | safe }}
+    {% else %}
+      © {{ now() | date(format="%Y") }} {{ config.title }}
+    {% endif %}
+  </span>
+
+  {% if config.extra.footer_nav %}
+  <nav aria-label="Footer">
+    {% for item in config.extra.footer_nav %}
+    <a href="{{ get_url(path=item.url, trailing_slash=true) }}">{{ item.name }}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+</footer>

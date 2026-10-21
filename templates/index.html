@@ -1,58 +1,27 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" data-theme="light" dir="ltr">
-    <head>
-        {%- block title -%}
-            <title>{{ config.title }}</title>
-        {%- endblock title -%}
+<html lang="{{ lang | default(value=config.default_language) | default(value='en') }}">
+<head>
+  {% include "partials/head.html" %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        {% include "partials/head.html" %}
-        {% include "partials/theme_init.html" %}
-    </head>
-    <body>
-        <a class="skip-link" href="#main">Skip to content</a>
+  <div class="desk">
+    <div class="sheet{% if config.extra.full_width %} sheet--wide{% endif %}">
+      {% include "partials/header.html" %}
+      {% include "partials/extended_header.html" %}
 
-        {%- if config.extra.full_width -%}
-            {%- set container = "container full" -%}
-        {%- elif config.extra.center -%}
-            {%- set container = "container center" -%}
-        {%- else -%}
-            {%- set container = "container" -%}
-        {%- endif -%}
+      <main class="site-main" id="main">
+        {% block main %}{% endblock main %}
+      </main>
 
-        <div class="{{ container }}">
-            {% include "partials/header.html" %}
-            {% include "partials/extended_header.html" %}
+      {% include "partials/footer.html" %}
+      {% include "partials/extended_footer.html" %}
+    </div>
+  </div>
 
-            <main class="content" id="main">
-                {%- block main -%}
-                    {% include "partials/list.html" %}
-                {%- endblock main -%}
-            </main>
-
-            {%- block pagination -%}
-                {% include "partials/pagination.html" %}
-            {%- endblock pagination -%}
-
-            <footer class="footer">
-                <div class="footer__inner">
-                    {%- block copyright -%}
-                    <div class="copyright">
-                        {%- if config.extra.copyright -%}
-                        <span>{{ config.extra.copyright | safe }}</span>
-                        {%- else -%}
-                        <span>© {{ now() | date(format="%Y") }} {{ config.title }}</span>
-                        {%- endif -%}
-                    </div>
-                    {%- endblock copyright -%}
-
-                    {%- block script -%}
-                    <script defer src="{{ get_url(path="assets/js/menu.js") }}"></script>
-                    {% include "partials/search_script.html" %}
-                    {% include "partials/theme_script.html" %}
-                    {%- endblock script -%}
-                </div>
-                {% include "partials/extended_footer.html" %}
-            </footer>
-        </div>
-    </body>
+  {% block script %}
+  {% include "partials/scripts.html" %}
+  {% endblock script %}
+</body>
 </html>
