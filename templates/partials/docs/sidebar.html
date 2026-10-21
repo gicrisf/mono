@@ -1,0 +1,9 @@
+{% set current = current_path | default(value="/") %}
+{% set docs_index = get_section(path="docs/_index.md") %}
+
+<nav class="docs-nav" aria-label="Documentation">
+  {% for path in docs_index.subsections %}
+  {% set section = get_section(path=path) %}
+  {{<docs.group section={section} current={current} />}}
+  {% endfor %}
+</nav>

@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block main %}
+{% include "partials/docs/breadcrumb.html" %}
+
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    {% include "partials/docs/sidebar.html" %}
+  </aside>
+
+  <details class="docs-menu">
+    <summary class="docs-menu__toggle">Contents</summary>
+    {% include "partials/docs/sidebar.html" %}
+  </details>
+
+  <article class="docs-article">
+    <header class="docs-header">
+      <h1>{{ page.title }}</h1>
+      {% if page.extra.lead %}
+      <p class="docs-lede">{{ page.extra.lead | safe }}</p>
+      {% elif page.description %}
+      <p class="docs-lede">{{ page.description }}</p>
+      {% endif %}
+    </header>
+
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+
+    {% if config.extra.edit_page %}
+    <p class="docs-edit">
+      <a href="{{ config.extra.docs_repo }}/blob/{{ config.extra.repo_branch }}/content{{ current_path | trim_end(pat='/') }}.md">Edit this page ↗</a>
+    </p>
+    {% endif %}
+
+    {% include "partials/docs/pager.html" %}
+  </article>
+
+  <aside class="docs-outline-wrap">
+    {% include "partials/docs/outline.html" %}
+  </aside>
+</div>
+{% endblock main %}

@@ -1,0 +1,70 @@
+{% set top = page.extra.top | default(value=false) %}
+{% if page.lower %}{% set previous = page.lower %}{% endif %}
+{% if page.higher %}{% set next = page.higher %}{% endif %}
+
+{% if previous is not defined and not top %}
+{% set index = get_section(path=page.ancestors | reverse | first) %}
+{% set parent = get_section(path=index.ancestors | reverse | first) %}
+{% if parent.subsections %}
+{% set first_subsection = get_section(path=parent.subsections | first) %}
+{% if index.permalink == first_subsection.permalink %}
+{% if parent.pages %}{% set previous = parent.pages | last %}{% endif %}
+{% else %}
+{% set_global found_prev = false %}
+{% for path in parent.subsections | reverse %}
+{% set subsection = get_section(path=path) %}
+{% if subsection.permalink == index.permalink %}
+{% set_global found_prev = true %}
+{% elif found_prev %}
+{% if subsection.pages %}{% set_global previous = subsection.pages | last %}{% endif %}
+{% set_global found_prev = false %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if next is not defined %}
+{% if top %}
+{% set docs_index = get_section(path="docs/_index.md") %}
+{% if docs_index.subsections %}
+{% set first_subsection = get_section(path=docs_index.subsections | first) %}
+{% if first_subsection.pages %}{% set next = first_subsection.pages | first %}{% endif %}
+{% endif %}
+{% else %}
+{% set index = get_section(path=page.ancestors | reverse | first) %}
+{% set parent = get_section(path=index.ancestors | reverse | first) %}
+{% if parent.subsections %}
+{% set_global found_next = false %}
+{% for path in parent.subsections %}
+{% set subsection = get_section(path=path) %}
+{% if subsection.permalink == index.permalink %}
+{% set_global found_next = true %}
+{% elif found_next %}
+{% if subsection.pages %}{% set_global next = subsection.pages | first %}{% endif %}
+{% set_global found_next = false %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if previous is defined or next is defined %}
+<nav class="docs-pager" aria-label="Documentation pages">
+  {% if previous is defined %}
+  <a class="docs-pager__link" href="{{ previous.permalink }}">
+    <span class="docs-pager__direction">← Previous</span>
+    {{ previous.title }}
+  </a>
+  {% else %}
+  <span></span>
+  {% endif %}
+
+  {% if next is defined %}
+  <a class="docs-pager__link docs-pager__link--next" href="{{ next.permalink }}">
+    <span class="docs-pager__direction">Next →</span>
+    {{ next.title }}
+  </a>
+  {% endif %}
+</nav>
+{% endif %}

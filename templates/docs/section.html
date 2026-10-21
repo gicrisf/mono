@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+
+{% block main %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ config.base_url }}">Home</a>
+  <span aria-hidden="true">/</span>
+  {% for path in section.ancestors %}
+  {% set ancestor = get_section(path=path) %}
+  {% if ancestor.path != "/" %}
+  <a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a>
+  <span aria-hidden="true">/</span>
+  {% endif %}
+  {% endfor %}
+  <span aria-current="page">{{ section.title }}</span>
+</nav>
+
+<hr class="halftone">
+
+<div class="docs-layout docs-layout--index">
+  <aside class="docs-sidebar">
+    {% include "partials/docs/sidebar.html" %}
+  </aside>
+
+  <details class="docs-menu">
+    <summary class="docs-menu__toggle">Contents</summary>
+    {% include "partials/docs/sidebar.html" %}
+  </details>
+
+  <article class="docs-article">
+    <header class="docs-header">
+      <h1>{{ section.title }}</h1>
+      {% if section.description %}
+      <p class="docs-lede">{{ section.description }}</p>
+      {% endif %}
+    </header>
+
+    {% if section.content %}
+    <div class="prose">
+      {{ section.content | safe }}
+    </div>
+    {% endif %}
+
+    <div class="docs-index">
+      {% for entry in section.pages %}
+      <a class="docs-card" href="{{ entry.permalink }}">
+        <span class="docs-card__title">{{ entry.title }} →</span>
+        {% if entry.description %}
+        <span class="docs-card__description">{{ entry.description }}</span>
+        {% endif %}
+      </a>
+      {% endfor %}
+
+      {% for path in section.subsections %}
+      {% set subsection = get_section(path=path) %}
+      <a class="docs-card" href="{{ subsection.permalink }}">
+        <span class="docs-card__title">{{ subsection.title }} →</span>
+        {% if subsection.description %}
+        <span class="docs-card__description">{{ subsection.description }}</span>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </article>
+</div>
+{% endblock main %}
