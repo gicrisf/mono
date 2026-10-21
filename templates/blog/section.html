@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+{% block main %}
+<article class="page-single">
+  <header class="page-header">
+    <p class="page-kicker">Notes</p>
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}
+    <p class="page-lede">{{ section.description }}</p>
+    {% endif %}
+  </header>
+
+  {% if section.content %}
+  <div class="prose">
+    {{ section.content | safe }}
+  </div>
+  {% endif %}
+
+  <div class="post-list">
+    {% for entry in paginator.pages %}
+    <article class="post-list__item">
+      {% if entry.date %}
+      <time datetime="{{ entry.date }}">{{ entry.date | date(format="%Y.%m.%d") }}</time>
+      {% endif %}
+      <h2><a href="{{ entry.permalink }}">{{ entry.title }}</a></h2>
+      {% if entry.description %}
+      <p>{{ entry.description }}</p>
+      {% endif %}
+      {% if entry.taxonomies.tags %}
+      <p class="post-list__tags">
+        {% for tag in entry.taxonomies.tags %}
+        <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
+        {% endfor %}
+      </p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+
+  {% include "partials/pagination.html" %}
+</article>
+{% endblock main %}
