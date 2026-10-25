@@ -27,18 +27,25 @@
 }
 
 .masthead {
-  align-items: center;
+  align-items: stretch;
   display: flex;
   gap: var(--space-md);
   margin-bottom: var(--space-md);
 }
 
 .brand {
+  align-items: center;
+  align-self: stretch;
+  border: 1px solid var(--color-rule);
   color: var(--color-ink);
+  display: inline-flex;
   font-family: var(--font-mono);
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.2;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-sm);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -120,6 +127,7 @@
 
 .menu-toggle {
   align-items: center;
+  align-self: stretch;
   background: var(--color-paper);
   border: 1px solid var(--color-rule);
   box-shadow: var(--shadow-hard);
@@ -128,6 +136,7 @@
   display: none;
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  justify-content: center;
   letter-spacing: 0.08em;
   line-height: 1.2;
   padding-block: var(--space-xs);
