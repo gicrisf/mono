@@ -2,11 +2,12 @@
 
 {% block main %}
 {% set category_taxonomy = get_taxonomy(kind="categories") %}
+{% set category_title = "{" ~ term.name ~ "}" %}
 <article class="page-single">
-  {{<breadcrumb.trail title={term.name} ancestors={[]} base_url={config.base_url} parent_label="Categories" parent_url={category_taxonomy.permalink} />}}
+  {{<breadcrumb.trail title={category_title} ancestors={[]} base_url={config.base_url} parent_label="Categories" parent_url={category_taxonomy.permalink} />}}
 
   <header class="page-header">
-    <h1>Posts in {{ term.name }}</h1>
+    <h1>Posts in {{ category_title }}</h1>
     <p class="page-lede">{{ term.pages | length }} post{{ term.pages | length | pluralize }}</p>
   </header>
 

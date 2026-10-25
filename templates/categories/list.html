@@ -9,11 +9,15 @@
   </header>
 
   <div class="prose">
-    <ul>
+    <div class="cards">
       {% for term in terms %}
-      <li><a href="{{ get_taxonomy_url(kind='categories', name=term.name) }}">{{ term.name }}</a> ({{ term.pages | length }})</li>
+      {% set category_title = "{" ~ term.name ~ "}" %}
+      {% set category_url = get_taxonomy_url(kind="categories", name=term.name) %}
+      {% set category_count = term.pages | length %}
+      {% set category_description = category_count ~ " post" ~ (category_count | pluralize) %}
+      {{<ui.card title={category_title} to={category_url} description={category_description} />}}
       {% endfor %}
-    </ul>
+    </div>
   </div>
 </article>
 {% endblock main %}

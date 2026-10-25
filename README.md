@@ -107,7 +107,7 @@ paginate_by = 5
 +++
 ```
 
-Posts use Zola's `date`, `description`, and `taxonomies` values. Tags render with a `#` prefix; categories render as distinct links in the list and article footer. Both link to their taxonomy pages and breadcrumbs.
+Posts use Zola's `date`, `description`, and `taxonomies` values. Tags render with a `#` prefix; categories render as `{Category}` links in the list and article footer. The categories index uses the same cards as the home page. Both link to their taxonomy pages and breadcrumbs.
 
 ## Breadcrumbs
 

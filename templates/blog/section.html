@@ -33,7 +33,7 @@
         {% if entry.taxonomies.categories %}
         <span class="post-list__group">
           {% for category in entry.taxonomies.categories %}
-          <a class="post-category" href="{{ get_taxonomy_url(kind='categories', name=category) }}">{{ category }}</a>
+          <a class="post-category" href="{{ get_taxonomy_url(kind='categories', name=category) }}">{{ "{" }}{{ category }}{{ "}" }}</a>
           {% endfor %}
         </span>
         {% endif %}
