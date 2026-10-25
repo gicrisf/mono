@@ -109,6 +109,17 @@ paginate_by = 5
 
 Posts use Zola's `date`, `description`, and `taxonomies` values. Tags render with a `#` prefix; categories render as `{Category}` links in the list and article footer. The tags and categories indexes use the same cards as the home page. Tag term pages use a `tags ∋ #tag (N posts)` heading. Both taxonomies link to their taxonomy pages and breadcrumbs.
 
+Posts also support Zola's optional `authors` and `updated` values. When present, the post kicker shows the authors and updated date, and the document head adds author and `article:modified_time` metadata. When absent, nothing changes.
+
+```toml
++++
+title = "Example Post"
+date = 2026-10-22
+updated = 2026-10-24
+authors = ["Your Name"]
++++
+```
+
 ## Breadcrumbs
 
 Content templates call the `breadcrumb.trail` component. The trail starts at Home and ends with the current title. Pages and sections pass their section ancestors and the site base URL.

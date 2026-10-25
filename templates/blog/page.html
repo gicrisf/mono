@@ -5,8 +5,9 @@
   {{<breadcrumb.trail title={page.title} ancestors={page.ancestors} base_url={config.base_url} />}}
 
   <header class="page-header">
+    {% set authors = page.authors | join(sep=", ") %}
     <p class="page-kicker">
-      Blog{% if page.date %} · {{ page.date | date(format="%Y.%m.%d") }}{% endif %} · {{ page.reading_time }} min read
+      Blog{% if page.date %} · {{ page.date | date(format="%Y.%m.%d") }}{% endif %} · {{ page.reading_time }} min read{% if authors %} · By {{ authors }}{% endif %}{% if page.updated %} · Updated {{ page.updated | date(format="%Y.%m.%d") }}{% endif %}
     </p>
     <h1>{{ page.title }}</h1>
     {% if page.description %}
