@@ -192,6 +192,7 @@ The theme ships IBM Plex Mono 400, 500, and 700 as the fallback monospace face. 
 
 All scripts are progressive enhancements and ship as plain files.
 
+- `nav.js` collapses the site navigation into a menu button on small screens.
 - `code.js` adds language labels and copy buttons to code blocks.
 - `tabs.js` adds the tablist and keyboard behavior.
 - `search.js` opens the search panel with `/` or `Cmd/Ctrl+K`, then handles arrow keys, Enter, and Escape.

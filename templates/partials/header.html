@@ -1,40 +1,43 @@
 {% set here = current_path | default(value="/") %}
 
-<header class="masthead">
-  <a class="brand" href="{{ config.extra.logo_home_link | default(value=config.base_url) }}" aria-label="{{ config.title }} home">
-    {{ config.extra.logo_text | default(value=config.title) }}
-  </a>
-  <span class="masthead__rule" aria-hidden="true"></span>
-</header>
+<div class="site-header">
+  <header class="masthead">
+    <a class="brand" href="{{ config.extra.logo_home_link | default(value=config.base_url) }}" aria-label="{{ config.title }} home">
+      {{ config.extra.logo_text | default(value=config.title) }}
+    </a>
+    <span class="masthead__rule" aria-hidden="true"></span>
+    <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
+  </header>
 
-<nav class="site-nav" aria-label="Site">
-  {% for item in config.extra.main_menu %}
-    {% if item.external | default(value=false) %}
-      {% set item_url = item.url %}
-    {% else %}
-      {% set item_url = get_url(path=item.url, trailing_slash=true) %}
+  <nav class="site-nav" id="site-nav" aria-label="Site">
+    {% for item in config.extra.main_menu %}
+      {% if item.external | default(value=false) %}
+        {% set item_url = item.url %}
+      {% else %}
+        {% set item_url = get_url(path=item.url, trailing_slash=true) %}
+      {% endif %}
+      <a
+        class="nav-button"
+        href="{{ item_url }}"
+        {% if item.section and here is starting_with(pat=item.url) %}aria-current="page"{% endif %}
+      >{{ item.name }}</a>
+    {% endfor %}
+
+    {% if config.build_search_index %}
+    <button
+      aria-controls="search-popover"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      class="nav-button search-toggle"
+      type="button"
+    >Search <kbd>⌘K</kbd></button>
     {% endif %}
-    <a
-      class="nav-button"
-      href="{{ item_url }}"
-      {% if item.section and here is starting_with(pat=item.url) %}aria-current="page"{% endif %}
-    >{{ item.name }}</a>
-  {% endfor %}
 
-  {% if config.build_search_index %}
-  <button
-    aria-controls="search-popover"
-    aria-expanded="false"
-    aria-haspopup="dialog"
-    class="nav-button search-toggle"
-    type="button"
-  >Search <kbd>⌘K</kbd></button>
-  {% endif %}
-
-  {% if config.extra.github_url %}
-  <a class="nav-button" href="{{ config.extra.github_url }}" rel="noreferrer" target="_blank">GitHub ↗</a>
-  {% endif %}
-</nav>
+    {% if config.extra.github_url %}
+    <a class="nav-button" href="{{ config.extra.github_url }}" rel="noreferrer" target="_blank">GitHub ↗</a>
+    {% endif %}
+  </nav>
+</div>
 
 {% if config.build_search_index %}
 <div class="search-popover hidden" id="search-popover" role="dialog" aria-label="Search documentation" aria-modal="true">
