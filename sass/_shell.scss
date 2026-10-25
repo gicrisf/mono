@@ -38,6 +38,17 @@
   white-space: nowrap;
 }
 
+.masthead__rule {
+  align-self: stretch;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-rule) 0 2px,
+    transparent 2px 10px
+  );
+  flex: 1 1 auto;
+  min-width: var(--space-lg);
+}
+
 .masthead__chain {
   color: var(--color-ink);
   flex-shrink: 0;

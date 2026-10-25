@@ -4,8 +4,7 @@
   <a class="brand" href="{{ config.extra.logo_home_link | default(value=config.base_url) }}" aria-label="{{ config.title }} home">
     {{ config.extra.logo_text | default(value=config.title) }}
   </a>
-  {% include "partials/shell/chain.html" %}
-  {% include "partials/shell/commits.html" %}
+  <span class="masthead__rule" aria-hidden="true"></span>
 </header>
 
 <nav class="site-nav" aria-label="Site">
