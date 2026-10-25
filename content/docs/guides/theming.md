@@ -44,7 +44,7 @@ custom_css = "custom.css"
 The theme ships IBM Plex Mono as the fallback monospace face. Change `--font-mono` to use another monospace font, or `--font-sans` to use a different sans-serif stack.
 
 {% <ui.callout tone="warning"> %}
-The diagram font and the page font are separate concerns. A consuming site can set `--ondine-font` when it adds diagrams later.
+The diagram font and the page font are separate concerns. A consuming site can set `--mono-font` when it adds diagrams later.
 {% </ui.callout> %}
 
 ## Spacing

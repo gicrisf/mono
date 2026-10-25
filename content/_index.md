@@ -1,5 +1,5 @@
 +++
-title = "Ondine"
+title = "mono"
 description = "A documentation and blog theme for Zola, styled as a printed catalog."
 template = "home.html"
 sort_by = "weight"
@@ -21,5 +21,5 @@ secondary_label = "Read the Blog →"
 {{<ui.card title="Theming" to="/docs/guides/theming/" description="Adjust the design tokens and typography." />}}
 {{<ui.card title="API Reference" to="/docs/api/compiler/" description="Browse the compiler API pages and nested navigation." />}}
 {{<ui.card title="Blog" to="/blog/" description="Read short notes about the theme." />}}
-{{<ui.card title="Source" to="https://github.com/wevm/ondine" description="Inspect the project this theme is modeled on." />}}
+{{<ui.card title="Source" to="https://github.com/gicrisf/mono" description="Inspect the theme source." />}}
 {% </ui.cards> %}

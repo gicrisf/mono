@@ -1,7 +1,7 @@
 # The URL the site will be built for
 base_url = "/"
 
-title = "Ondine"
+title = "mono"
 description = "A documentation and blog theme for Zola, styled as a printed catalog."
 
 default_language = "en"
@@ -32,7 +32,7 @@ index_format = "elasticlunr_javascript"
 
 [extra]
 # Text in the top-left corner, and its destination.
-logo_text = "Ondine"
+logo_text = "mono"
 logo_home_link = "/"
 
 # Top-level navigation. `section` marks the entry as current when the path starts with its URL.
@@ -41,18 +41,18 @@ main_menu = [
   {url = "/blog/", name = "Blog", section = "blog"},
 ]
 
-github_url = "https://github.com/wevm/ondine"
+github_url = "https://github.com/gicrisf/mono"
 
 # Documentation section used by the sidebar and pager.
 docs_section = "docs"
 
 # Optional page action shown on documentation pages.
 edit_page = false
-docs_repo = "https://github.com/wevm/ondine"
+docs_repo = "https://github.com/gicrisf/mono"
 repo_branch = "main"
 
 # Footer contents, rendered as HTML.
-copyright = 'Ondine · <a href="https://github.com/wevm/ondine/blob/main/LICENSE">MIT License</a>'
+copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE">MIT License</a>'
 
 # Optional custom CSS placed in static/.
 # custom_css = "custom.css"

@@ -1,6 +1,6 @@
-# white-canvas
+# mono
 
-A documentation and blog theme for [Zola](https://www.getzola.org/), styled as a printed catalog. The layout follows the Ondine documentation site, with a paper sheet, boxed navigation, dotted rules, hard shadows, and monospace labels.
+A documentation and blog theme for [Zola](https://www.getzola.org/), styled as a printed catalog. The layout is inspired by the Ondine documentation site, with a paper sheet, boxed navigation, dotted rules, hard shadows, and monospace labels.
 
 ## Requirements
 
@@ -20,13 +20,13 @@ npm run check     # zola check
 Place this repository under your site's `themes` directory.
 
 ```sh
-git clone <theme-url> themes/white-canvas
+git clone <theme-url> themes/mono
 ```
 
 Set the theme in your site's `zola.toml`.
 
 ```toml
-theme = "white-canvas"
+theme = "mono"
 ```
 
 Copy the `[extra]` values from this repository's `zola.toml`, then change the title, menu, and footer for your site.
@@ -37,9 +37,9 @@ Theme behavior lives under `[extra]`.
 
 ```toml
 [extra]
-logo_text = "Ondine"
+logo_text = "mono"
 logo_home_link = "/"
-github_url = "https://github.com/wevm/ondine"
+github_url = "https://github.com/gicrisf/mono"
 docs_section = "docs"
 
 main_menu = [
@@ -48,10 +48,10 @@ main_menu = [
 ]
 
 edit_page = false
-docs_repo = "https://github.com/wevm/ondine"
+docs_repo = "https://github.com/gicrisf/mono"
 repo_branch = "main"
 
-copyright = 'Ondine · <a href="https://github.com/wevm/ondine/blob/main/LICENSE">MIT License</a>'
+copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE">MIT License</a>'
 ```
 
 The optional `section` value on a menu entry marks the entry as current when `current_path` starts with the entry URL. If it is omitted, the entry is never marked as current.

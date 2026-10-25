@@ -1,5 +1,5 @@
 +++
-title = "ondine"
+title = "mono"
 description = "Reference for the browser mount API."
 template = "docs/section.html"
 page_template = "docs/page.html"

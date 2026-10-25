@@ -14,9 +14,9 @@ Theme behavior lives in `zola.toml` under `[extra]`. The menu and footer accept 
 
 ```toml
 [extra]
-logo_text = "Ondine"
+logo_text = "mono"
 logo_home_link = "/"
-github_url = "https://github.com/wevm/ondine"
+github_url = "https://github.com/gicrisf/mono"
 
 main_menu = [
   {url = "/docs/", name = "Docs", section = "docs"},
@@ -48,5 +48,5 @@ The footer accepts HTML for a license or project link.
 
 ```toml
 [extra]
-copyright = 'Ondine · <a href="https://github.com/wevm/ondine/blob/main/LICENSE">MIT License</a>'
+copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE">MIT License</a>'
 ```

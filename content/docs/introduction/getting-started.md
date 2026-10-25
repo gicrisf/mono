@@ -23,7 +23,7 @@ Copy the theme into your site's `themes` directory, or use it as the site itself
 zola build
 ```
 
-Set `theme = "white-canvas"` in your site configuration when the theme lives under `themes/`.
+Set `theme = "mono"` in your site configuration when the theme lives under `themes/`.
 
 ## Next Steps
 
