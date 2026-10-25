@@ -41,7 +41,9 @@ $$
 
 ## Notes
 
-- KaTeX supports a large LaTeX subset, not every LaTeX package.
+- KaTeX supports a large LaTeX subset, not every LaTeX package.[^katex-subset]
 - `$...$` can be ambiguous in currency-like prose. Keep paired dollar signs intended as math.
 - Search indexes and feeds contain the raw LaTeX source.
 - Pages without `math = true` do not load the KaTeX stylesheet or scripts.
+
+[^katex-subset]: KaTeX lists supported commands at <https://katex.org/docs/supported.html>.

@@ -157,6 +157,73 @@
   .zola-anchor:focus-visible {
     opacity: 1;
   }
+
+  .footnote-reference {
+    line-height: 0;
+
+    a {
+      border-bottom: 1px dotted var(--color-rule);
+      color: var(--color-link);
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      text-decoration: none;
+
+      &:hover {
+        border-bottom-style: solid;
+      }
+    }
+  }
+
+  .footnotes {
+    border-top: 1px dashed var(--color-rule);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-md);
+
+    &::before {
+      content: "Footnotes";
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+      text-transform: uppercase;
+    }
+  }
+
+  .footnotes-list {
+    padding-left: var(--space-lg);
+
+    li {
+      margin-block: var(--space-sm);
+    }
+
+    p {
+      margin-block: var(--space-xs);
+    }
+
+    a[href*="#fr-"] {
+      font-family: var(--font-mono);
+      margin-left: var(--space-xs);
+      text-decoration: none;
+    }
+  }
+
+  .footnote-reference:target,
+  .footnotes-list li:target {
+    background: var(--color-tint);
+  }
+
+  .footnote-definition {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    margin-top: var(--space-lg);
+
+    p {
+      display: inline;
+    }
+  }
 }
 
 .katex-display {

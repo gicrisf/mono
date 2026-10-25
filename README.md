@@ -146,6 +146,23 @@ Taxonomy templates pass an optional parent label and URL. List pages omit both a
 {{<breadcrumb.trail title={tag_title} ancestors={[]} base_url={config.base_url} parent_label="Tags" parent_url={tag_taxonomy.permalink} />}}
 ```
 
+## Footnotes
+
+Footnotes use Zola's Markdown syntax and require `bottom_footnotes = true` under `[markdown]`.
+
+```toml
+[markdown]
+bottom_footnotes = true
+```
+
+```markdown
+A note.[^1]
+
+[^1]: The footnote text.
+```
+
+Zola renders the notes at the end of the article with back-references. The theme styles the note section and also handles the default inline `.footnote-definition` output if `bottom_footnotes` is left false. The Math guide includes a live example.
+
 ## Components
 
 Components are Tera 2 components. Zola renders them before it parses Markdown, so component bodies can contain Markdown, lists, tables, and fenced code.

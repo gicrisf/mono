@@ -21,6 +21,7 @@ build_search_index = true
 
 [markdown]
 insert_anchor_links = "right"
+bottom_footnotes = true
 
 [markdown.highlighting]
 style = "class"
