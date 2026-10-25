@@ -4,6 +4,7 @@ description = "The theme keeps Zola's static output and adds interaction only wh
 date = 2026-10-20
 [taxonomies]
 tags = ["zola", "components"]
+categories = ["Zola"]
 +++
 
 The site builds with Zola alone. Sass compiles, Markdown renders, and search uses the index Zola already generates. No JavaScript build step is required.

@@ -4,6 +4,7 @@ description = "Why the theme frames every page as a sheet instead of a plain col
 date = 2026-10-22
 [taxonomies]
 tags = ["design", "layout"]
+categories = ["Design"]
 +++
 
 Documentation pages carry a lot of structure: navigation, a title, sections, code, tables, and cross-references. A plain column hides that structure. This theme makes it visible.

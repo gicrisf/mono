@@ -28,11 +28,22 @@
       {% if entry.description %}
       <p>{{ entry.description }}</p>
       {% endif %}
-      {% if entry.taxonomies.tags %}
-      <p class="post-list__tags">
-        {% for tag in entry.taxonomies.tags %}
-        <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
-        {% endfor %}
+      {% if entry.taxonomies.categories or entry.taxonomies.tags %}
+      <p class="post-list__meta">
+        {% if entry.taxonomies.categories %}
+        <span class="post-list__group">
+          {% for category in entry.taxonomies.categories %}
+          <a class="post-category" href="{{ get_taxonomy_url(kind='categories', name=category) }}">{{ category }}</a>
+          {% endfor %}
+        </span>
+        {% endif %}
+        {% if entry.taxonomies.tags %}
+        <span class="post-list__group">
+          {% for tag in entry.taxonomies.tags %}
+          <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
+          {% endfor %}
+        </span>
+        {% endif %}
       </p>
       {% endif %}
     </article>

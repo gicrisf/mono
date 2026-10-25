@@ -18,11 +18,22 @@
     {{ page.content | safe }}
   </div>
 
-  {% if page.taxonomies.tags %}
+  {% if page.taxonomies.categories or page.taxonomies.tags %}
   <footer class="post-tags">
-    {% for tag in page.taxonomies.tags %}
-    <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
-    {% endfor %}
+    {% if page.taxonomies.categories %}
+    <span class="post-tags__group">
+      {% for category in page.taxonomies.categories %}
+      <a class="post-category" href="{{ get_taxonomy_url(kind='categories', name=category) }}">{{ category }}</a>
+      {% endfor %}
+    </span>
+    {% endif %}
+    {% if page.taxonomies.tags %}
+    <span class="post-tags__group">
+      {% for tag in page.taxonomies.tags %}
+      <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">#{{ tag }}</a>
+      {% endfor %}
+    </span>
+    {% endif %}
   </footer>
   {% endif %}
 </article>

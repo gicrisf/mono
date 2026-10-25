@@ -107,7 +107,7 @@ paginate_by = 5
 +++
 ```
 
-Posts use Zola's `date`, `description`, and `taxonomies` values. Tags and categories reuse the theme's article typography.
+Posts use Zola's `date`, `description`, and `taxonomies` values. Tags render with a `#` prefix; categories render as distinct links in the list and article footer. Both link to their taxonomy pages and breadcrumbs.
 
 ## Breadcrumbs
 
