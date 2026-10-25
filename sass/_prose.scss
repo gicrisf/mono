@@ -158,3 +158,9 @@
     opacity: 1;
   }
 }
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: var(--space-xs);
+}

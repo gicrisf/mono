@@ -7,4 +7,4 @@ sort_by = "weight"
 weight = 20
 +++
 
-Start with configuration, then adjust the design tokens.
+Start with configuration, then adjust the design tokens or add math formulas.

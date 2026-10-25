@@ -204,6 +204,24 @@ build_search_index = true
 
 Every code block receives a language label and a copy button. A labeled block uses the filename instead.
 
+## Math
+
+Opt individual pages into KaTeX with `math = true` under `[extra]`.
+
+```toml
++++
+title = "A Formula"
+[extra]
+math = true
++++
+```
+
+KaTeX 0.19.1 is vendored under `static/assets/katex/`, so no CDN or build step is required. Pages without the flag load no KaTeX CSS or JavaScript.
+
+Inline math uses `$...$`; display math uses `$$...$$`. Fenced code blocks are ignored. Keep currency-like prose away from paired dollar signs, which the renderer treats as math. Search indexes and feeds keep the raw LaTeX source.
+
+KaTeX implements a large LaTeX subset, not every package. Its assets are MIT licensed; see `static/assets/katex/LICENSE`.
+
 ## Styling
 
 The design tokens are CSS custom properties in `sass/_tokens.scss`. Override them in a custom stylesheet.
@@ -234,6 +252,7 @@ All scripts are progressive enhancements and ship as plain files.
 - `tabs.js` adds the tablist and keyboard behavior.
 - `search.js` opens the search panel with `/` or `Cmd/Ctrl+K`, then handles arrow keys, Enter, and Escape.
 - `outline.js` marks the current documentation heading.
+- `math.js` renders opted-in pages with KaTeX after the DOM loads.
 
 ## Files
 
@@ -260,6 +279,7 @@ sass/
   _search.scss            search panel
 static/
   assets/js/              progressive enhancement scripts
+  assets/katex/           KaTeX 0.19.1 styles, scripts, and fonts
   fonts/                  self-hosted IBM Plex Mono
 ```
 
