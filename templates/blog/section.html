@@ -2,6 +2,8 @@
 
 {% block main %}
 <article class="page-single">
+  {{<breadcrumb.trail title={section.title} ancestors={section.ancestors} base_url={config.base_url} />}}
+
   <header class="page-header">
     <p class="page-kicker">Notes</p>
     <h1>{{ section.title }}</h1>

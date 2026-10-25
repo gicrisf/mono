@@ -2,6 +2,8 @@
 
 {% block main %}
 <article class="page-single">
+  {{<breadcrumb.trail title={page.title} ancestors={page.ancestors} base_url={config.base_url} />}}
+
   <header class="page-header">
     <p class="page-kicker">
       Blog{% if page.date %} · {{ page.date | date(format="%Y.%m.%d") }}{% endif %} · {{ page.reading_time }} min read

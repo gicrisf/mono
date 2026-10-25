@@ -1,0 +1,23 @@
+{% component breadcrumb.trail(title, ancestors, base_url, parent_label = "", parent_url = "") %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ base_url }}">Home</a>
+  <span aria-hidden="true">/</span>
+
+  {% if parent_url %}
+  <a href="{{ parent_url }}">{{ parent_label }}</a>
+  <span aria-hidden="true">/</span>
+  {% endif %}
+
+  {% for path in ancestors %}
+  {% set ancestor = get_section(path=path) %}
+  {% if ancestor.path != "/" %}
+  <a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a>
+  <span aria-hidden="true">/</span>
+  {% endif %}
+  {% endfor %}
+
+  <span aria-current="page">{{ title }}</span>
+</nav>
+
+<hr class="halftone">
+{% endcomponent breadcrumb.trail %}

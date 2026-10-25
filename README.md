@@ -109,6 +109,22 @@ paginate_by = 5
 
 Posts use Zola's `date`, `description`, and `taxonomies` values. Tags and categories reuse the theme's article typography.
 
+## Breadcrumbs
+
+Content templates call the `breadcrumb.trail` component. The trail starts at Home and ends with the current title. Pages and sections pass their section ancestors and the site base URL.
+
+```jinja2
+{{<breadcrumb.trail title={page.title} ancestors={page.ancestors} base_url={config.base_url} />}}
+```
+
+Taxonomy templates pass an optional parent label and URL. List pages omit both and pass an empty ancestor list.
+
+```jinja2
+{% set tag_taxonomy = get_taxonomy(kind="tags") %}
+{% set tag_title = "#" ~ term.name %}
+{{<breadcrumb.trail title={tag_title} ancestors={[]} base_url={config.base_url} parent_label="Tags" parent_url={tag_taxonomy.permalink} />}}
+```
+
 ## Components
 
 Components are Tera 2 components. Zola renders them before it parses Markdown, so component bodies can contain Markdown, lists, tables, and fenced code.
@@ -208,7 +224,7 @@ templates/
   section.html            generic section
   docs/                   documentation layouts
   blog/                   blog layouts
-  components/             docs navigation and UI components
+  components/             breadcrumb, docs navigation, and UI components
   partials/               head, header, footer, search, pager
 sass/
   _tokens.scss            colors, fonts, spacing, shadows
@@ -216,6 +232,7 @@ sass/
   _shell.scss             sheet, masthead, navigation, footer
   _home.scss              landing page
   _prose.scss             article typography
+  _breadcrumb.scss        breadcrumb and halftone divider
   _docs.scss              documentation layout
   _blog.scss              blog list and pagination
   _components.scss        cards, tabs, callouts, code blocks

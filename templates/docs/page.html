@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block main %}
-{% include "partials/docs/breadcrumb.html" %}
+{{<breadcrumb.trail title={page.title} ancestors={page.ancestors} base_url={config.base_url} />}}
 
 <div class="docs-layout">
   <aside class="docs-sidebar">

@@ -1,27 +1,5 @@
 @import "tokens";
 
-.breadcrumb {
-  font-size: 1rem;
-  font-weight: 700;
-
-  a {
-    color: var(--color-link);
-    text-decoration: underline;
-  }
-
-  [aria-current="page"] {
-    font-weight: 700;
-  }
-}
-
-.halftone {
-  background-image: radial-gradient(circle, #8c8c8c 0.6px, transparent 0.8px);
-  background-size: 3px 3px;
-  border: none;
-  height: 0.75rem;
-  margin-block: var(--space-md);
-}
-
 .docs-layout {
   align-items: start;
   display: grid;

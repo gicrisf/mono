@@ -1,7 +1,11 @@
 {% extends "index.html" %}
 
 {% block main %}
+{% set tag_taxonomy = get_taxonomy(kind="tags") %}
+{% set tag_title = "#" ~ term.name %}
 <article class="page-single">
+  {{<breadcrumb.trail title={tag_title} ancestors={[]} base_url={config.base_url} parent_label="Tags" parent_url={tag_taxonomy.permalink} />}}
+
   <header class="page-header">
     <h1>Posts tagged #{{ term.name }}</h1>
     <p class="page-lede">{{ term.pages | length }} post{{ term.pages | length | pluralize }}</p>

@@ -1,20 +1,7 @@
 {% extends "index.html" %}
 
 {% block main %}
-<nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="{{ config.base_url }}">Home</a>
-  <span aria-hidden="true">/</span>
-  {% for path in section.ancestors %}
-  {% set ancestor = get_section(path=path) %}
-  {% if ancestor.path != "/" %}
-  <a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a>
-  <span aria-hidden="true">/</span>
-  {% endif %}
-  {% endfor %}
-  <span aria-current="page">{{ section.title }}</span>
-</nav>
-
-<hr class="halftone">
+{{<breadcrumb.trail title={section.title} ancestors={section.ancestors} base_url={config.base_url} />}}
 
 <div class="docs-layout docs-layout--index">
   <aside class="docs-sidebar">

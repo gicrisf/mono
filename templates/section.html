@@ -2,6 +2,8 @@
 
 {% block main %}
 <article class="page-single">
+  {{<breadcrumb.trail title={section.title} ancestors={section.ancestors} base_url={config.base_url} />}}
+
   <header class="page-header">
     <h1>{{ section.title | default(value=config.title) }}</h1>
     {% if section.description %}
