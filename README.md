@@ -120,6 +120,16 @@ authors = ["Your Name"]
 +++
 ```
 
+Long posts can opt into a table of contents with `toc = true` under `[extra]`. On wide screens it sits in a sticky left column beside the article; at `1180px` and below it becomes a collapsed “On This Page” disclosure above the post header. It is off by default for blog posts, while the documentation outline remains on by default.
+
+```toml
++++
+title = "A Long Post"
+[extra]
+toc = true
++++
+```
+
 ## Breadcrumbs
 
 Content templates call the `breadcrumb.trail` component. The trail starts at Home and ends with the current title. Pages and sections pass their section ancestors and the site base URL.
@@ -236,7 +246,7 @@ templates/
   docs/                   documentation layouts
   blog/                   blog layouts
   components/             breadcrumb, docs navigation, and UI components
-  partials/               head, header, footer, search, pager
+  partials/               head, header, footer, search, pagers, blog TOC
 sass/
   _tokens.scss            colors, fonts, spacing, shadows
   _main.scss              reset and base elements

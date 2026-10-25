@@ -1,0 +1,23 @@
+<ul class="post-toc__links">
+  {% for heading in page.toc %}
+  <li>
+    <a href="{{ heading.permalink }}">{{ heading.title }}</a>
+    {% if heading.children %}
+    <ul>
+      {% for child in heading.children %}
+      <li>
+        <a href="{{ child.permalink }}">{{ child.title }}</a>
+        {% if child.children %}
+        <ul>
+          {% for grandchild in child.children %}
+          <li><a href="{{ grandchild.permalink }}">{{ grandchild.title }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
