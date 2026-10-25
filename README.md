@@ -120,7 +120,7 @@ authors = ["Your Name"]
 +++
 ```
 
-Long posts can opt into a table of contents with `toc = true` under `[extra]`. On wide screens it sits in a sticky left column beside the article; at `1180px` and below it becomes a collapsed “On This Page” disclosure above the post header. It is off by default for blog posts, while the documentation outline remains on by default.
+Long posts can opt into a table of contents with `toc = true` under `[extra]`. On wide screens it sits in a sticky left column beside the article; at `860px` and below it becomes a collapsed “On This Page” disclosure above the post header, matching the documentation navigation sidebar. It is off by default for blog posts, while the documentation outline remains on by default.
 
 ```toml
 +++
