@@ -1,0 +1,24 @@
+{% component image.render(src, alt = "", sizes = "100vw", widths = "352,704,1024", op = "fit_width", class_name = "", loading = "lazy") %}
+{% if src is matching(pat="[.](jpg|jpeg|png|gif|webp)$") %}
+{% set_global srcset = "" %}
+{% for width in widths | split(pat=",") %}
+{% set w = width | trim | int %}
+{% set variant = resize_image(path=src, width=w, op=op) %}
+{% set_global srcset = srcset ~ variant.url ~ " " ~ w ~ "w" %}
+{% if not loop.last %}{% set_global srcset = srcset ~ ", " %}{% endif %}
+{% endfor %}
+{% set fallback = resize_image(path=src, width=704, op=op) %}
+<img
+  src="{{ fallback.url }}"
+  srcset="{{ srcset }}"
+  sizes="{{ sizes }}"
+  width="{{ fallback.width }}"
+  height="{{ fallback.height }}"
+  alt="{{ alt }}"
+  class="{{ class_name }}"
+  loading="{{ loading }}"
+>
+{% else %}
+<img src="{{ get_url(path=src) }}" alt="{{ alt }}" class="{{ class_name }}" loading="{{ loading }}">
+{% endif %}
+{% endcomponent image.render %}

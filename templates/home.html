@@ -23,11 +23,23 @@
     </p>
   </div>
 
+  {% if section.extra.home_image %}
+  {% set home_image_alt = section.extra.home_image_alt | default(value="") %}
+  <figure class="home-art">
+    <div class="home-art__frame">
+      {{<image.render src={section.extra.home_image} alt={home_image_alt} sizes="(max-width: 22rem) 100vw, 22rem" loading="eager" />}}
+    </div>
+    {% if section.extra.home_image_caption %}
+    <figcaption class="home-art__caption">{{ section.extra.home_image_caption }}</figcaption>
+    {% endif %}
+  </figure>
+  {% else %}
   <div class="home-plate" aria-hidden="true">
     <div class="home-plate__chain">{% include "partials/shell/chain.html" %}</div>
     <div class="home-plate__commits">{% include "partials/shell/commits.html" %}</div>
     <p class="home-plate__caption">source → compile → svg</p>
   </div>
+  {% endif %}
 </section>
 
 <div class="home-content prose">

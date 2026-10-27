@@ -97,7 +97,29 @@
   width: 90%;
 }
 
-.home-plate__caption {
+.home-art {
+  justify-self: end;
+  margin: 0;
+  max-width: 22rem;
+  width: 100%;
+}
+
+.home-art__frame {
+  border: 1px solid var(--color-faint);
+  box-shadow: var(--shadow-sheet);
+  overflow: hidden;
+}
+
+.home-art__frame img {
+  display: block;
+  filter: contrast(1.2) brightness(1.1) saturate(0.9);
+  height: auto;
+  transform: scale(1.06);
+  width: 100%;
+}
+
+.home-plate__caption,
+.home-art__caption {
   border-top: 1px dashed var(--color-rule);
   color: var(--color-muted);
   font-family: var(--font-mono);
@@ -115,5 +137,9 @@
 @media (max-width: $stack) {
   .home-hero {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-art {
+    justify-self: center;
   }
 }

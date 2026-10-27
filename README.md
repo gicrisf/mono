@@ -62,6 +62,28 @@ Enable Zola's search index in the site configuration.
 build_search_index = true
 ```
 
+## Home Page
+
+The root `_index.md` controls the landing page. Use `template = "home.html"` and set the hero copy under `[extra]`.
+
+```toml
++++
+title = "My Blog"
+template = "home.html"
+
+[extra]
+kicker = "about"
+lead = "A short introduction."
+primary_url = "/blog/"
+primary_label = "Read the Blog →"
+home_image = "jelly.jpg"
+home_image_alt = "A jellyfish illustration"
+home_image_caption = "jelly"
++++
+```
+
+`home_image` replaces the default diagram in the hero with a raster image. The theme renders a responsive `srcset` and shows `home_image_caption` below the image when present. Omit the image to keep the diagram.
+
 ## Blog Content
 
 A blog section sets the list template, article template, date sorting, and page size.
@@ -191,6 +213,16 @@ build_search_index = true
 
 Every code block receives a language label and a copy button. A labeled block uses the filename instead.
 
+### Images
+
+The `image.render` component builds a responsive `srcset` with Zola's `resize_image`. It accepts `src`, `alt`, `sizes`, `widths`, `op`, `class_name`, and `loading`.
+
+```jinja2
+{{<image.render src="jelly.jpg" alt="A jellyfish illustration" sizes="22rem" loading="eager" />}}
+```
+
+Resized variants are written to `static/processed_images/`. SVG sources bypass resizing.
+
 ## Math
 
 Opt individual pages into KaTeX with `math = true` under `[extra]`.
@@ -249,7 +281,7 @@ templates/
   page.html               generic page
   section.html            generic section
   blog/                   blog layouts
-  components/             breadcrumb and UI components
+  components/             breadcrumb, image, and UI components
   partials/               head, header, footer, search, pagers, blog TOC
 sass/
   _tokens.scss            colors, fonts, spacing, shadows
