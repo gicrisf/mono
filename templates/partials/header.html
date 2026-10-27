@@ -1,6 +1,7 @@
 {% set here = current_path | default(value="/") %}
+{% set compact_nav = config.extra.compact_nav | default(value=false) %}
 
-<div class="site-header">
+<div class="site-header{% if compact_nav %} site-header--compact{% endif %}">
   <header class="masthead">
     <a class="brand" href="{{ config.extra.logo_home_link | default(value=config.base_url) }}" aria-label="{{ config.title }} home">
       {{ config.extra.logo_text | default(value=config.title) }}
@@ -14,7 +15,8 @@
       {% if item.external | default(value=false) %}
         {% set item_url = item.url %}
       {% else %}
-        {% set item_url = get_url(path=item.url, trailing_slash=true) %}
+        {% set item_slash = item.trailing_slash | default(value=true) %}
+        {% set item_url = get_url(path=item.url, trailing_slash=item_slash) %}
       {% endif %}
       <a
         class="nav-button"
@@ -40,11 +42,11 @@
 </div>
 
 {% if config.build_search_index %}
-<div class="search-popover hidden" id="search-popover" role="dialog" aria-label="Search documentation" aria-modal="true">
+<div class="search-popover hidden" id="search-popover" role="dialog" aria-label="Search" aria-modal="true">
   <div class="search-panel">
     <form class="search-form" role="search">
       <label class="visually-hidden" for="search">Search</label>
-      <input id="search" type="search" class="search-input" placeholder="Search documentation…" autocomplete="off">
+      <input id="search" type="search" class="search-input" placeholder="Search…" autocomplete="off">
     </form>
     <div class="search-results__not-found" hidden>No results found.</div>
     <div class="search-results" hidden>

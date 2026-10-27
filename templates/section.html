@@ -27,6 +27,8 @@
       <h2><a href="{{ entry.permalink }}">{{ entry.title }}</a></h2>
       {% if entry.description %}
       <p>{{ entry.description }}</p>
+      {% elif entry.summary %}
+      <p>{{ entry.summary | striptags | truncate(length=240) }}</p>
       {% endif %}
     </article>
     {% endfor %}

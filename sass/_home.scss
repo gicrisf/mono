@@ -112,7 +112,7 @@
   margin-top: var(--space-2xl);
 }
 
-@media (max-width: $docs-stack) {
+@media (max-width: $stack) {
   .home-hero {
     grid-template-columns: minmax(0, 1fr);
   }

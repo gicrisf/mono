@@ -2,7 +2,9 @@
 
 {% block main %}
 <article class="page-single">
+  {% if section.path != "/" %}
   {{<breadcrumb.trail title={section.title} ancestors={section.ancestors} base_url={config.base_url} />}}
+  {% endif %}
 
   <header class="page-header">
     <p class="page-kicker">Notes</p>
@@ -27,6 +29,8 @@
       <h2><a href="{{ entry.permalink }}">{{ entry.title }}</a></h2>
       {% if entry.description %}
       <p>{{ entry.description }}</p>
+      {% elif entry.summary %}
+      <p>{{ entry.summary | striptags | truncate(length=240) }}</p>
       {% endif %}
       {% if entry.taxonomies.categories or entry.taxonomies.tags %}
       <p class="post-list__meta">

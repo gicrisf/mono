@@ -3,6 +3,8 @@
   var nav = document.getElementById('site-nav');
   if (!toggle || !nav) return;
 
+  var header = nav.closest('.site-header');
+  var compact = header && header.classList.contains('site-header--compact');
   var breakpoint = window.matchMedia('(max-width: 760px)');
 
   function isOpen() {
@@ -37,13 +39,15 @@
     toggle.focus();
   });
 
-  if (breakpoint.addEventListener) {
-    breakpoint.addEventListener('change', function () {
-      if (!breakpoint.matches) setOpen(false);
-    });
-  } else {
-    breakpoint.addListener(function () {
-      if (!breakpoint.matches) setOpen(false);
-    });
+  if (!compact) {
+    if (breakpoint.addEventListener) {
+      breakpoint.addEventListener('change', function () {
+        if (!breakpoint.matches) setOpen(false);
+      });
+    } else {
+      breakpoint.addListener(function () {
+        if (!breakpoint.matches) setOpen(false);
+      });
+    }
   }
 })();

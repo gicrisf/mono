@@ -3,7 +3,7 @@
 {% block main %}
 <section class="home-hero">
   <div class="home-copy">
-    <p class="home-kicker">{{ section.extra.kicker | default(value="Documentation and blog") }}</p>
+    <p class="home-kicker">{{ section.extra.kicker | default(value="Blog") }}</p>
     <h1>{{ section.title | default(value=config.title) }}</h1>
 
     {% if section.extra.lead %}
@@ -12,15 +12,13 @@
 
     <p class="home-calls">
       {% if section.extra.primary_url %}
-      <a class="button-primary" href="{{ section.extra.primary_url }}">{{ section.extra.primary_label | default(value="Get Started →") }}</a>
+      <a class="button-primary" href="{{ section.extra.primary_url }}">{{ section.extra.primary_label | default(value="Read the Blog →") }}</a>
       {% else %}
-      <a class="button-primary" href="{{ get_url(path='docs', trailing_slash=true) }}">{{ section.extra.primary_label | default(value="Get Started →") }}</a>
+      <a class="button-primary" href="{{ get_url(path='blog', trailing_slash=true) }}">{{ section.extra.primary_label | default(value="Read the Blog →") }}</a>
       {% endif %}
 
       {% if section.extra.secondary_url %}
-      <a class="button-secondary" href="{{ section.extra.secondary_url }}">{{ section.extra.secondary_label | default(value="Read the Blog →") }}</a>
-      {% else %}
-      <a class="button-secondary" href="{{ get_url(path='blog', trailing_slash=true) }}">{{ section.extra.secondary_label | default(value="Read the Blog →") }}</a>
+      <a class="button-secondary" href="{{ section.extra.secondary_url }}">{{ section.extra.secondary_label | default(value="Source →") }}</a>
       {% endif %}
     </p>
   </div>
