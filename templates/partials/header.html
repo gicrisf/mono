@@ -4,7 +4,7 @@
 <div class="site-header{% if compact_nav %} site-header--compact{% endif %}">
   <header class="masthead">
     <a class="brand" href="{{ config.extra.logo_home_link | default(value=config.base_url) }}" aria-label="{{ config.title }} home">
-      {% if config.extra.logo_image %}<img class="brand__logo" src="{{ get_url(path=config.extra.logo_image) }}" alt="" width="192" height="192">{% endif %}{{ config.extra.logo_text | default(value=config.title) }}
+      {{ config.extra.logo_text | default(value=config.title) }}
     </a>
     <span class="masthead__rule" aria-hidden="true"></span>
     <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
