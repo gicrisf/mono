@@ -17,7 +17,8 @@ All design tokens are CSS custom properties in `sass/_tokens.scss`. The layout r
 | `--color-desk` | `#ececec` | Area around the sheet |
 | `--color-paper` | `#ffffff` | Sheet and controls |
 | `--color-ink` | `#000000` | Text, rules, and shadows |
-| `--color-link` | `#0047ab` | Links and focus |
+| `--color-accent` | `#1649d8` | Primary buttons |
+| `--color-link` | `#1649d8` | Links and focus |
 | `--color-chip` | `#fff3a8` | Labels and highlights |
 
 ## Override the Palette
@@ -29,7 +30,7 @@ Import a custom stylesheet from the site configuration, then override the proper
 :root {
   --color-desk: #f4f1e8;
   --color-paper: #fffdf6;
-  --color-accent: #0047ab;
+  --color-accent: #1649d8;
 }
 ```
 {% </ui.code_file> %}

@@ -247,7 +247,7 @@ The design tokens are CSS custom properties in `sass/_tokens.scss`. Override the
 :root {
   --color-desk: #f4f1e8;
   --color-paper: #fffdf6;
-  --color-accent: #0047ab;
+  --color-accent: #1649d8;
 }
 ```
 
