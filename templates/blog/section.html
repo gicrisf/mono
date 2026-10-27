@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 
 {% block main %}
+{% set section_content = section.content | trim %}
 <article class="page-single">
   {% if section.path != "/" %}
   {{<breadcrumb.trail title={section.title} ancestors={section.ancestors} base_url={config.base_url} />}}
@@ -14,13 +15,13 @@
     {% endif %}
   </header>
 
-  {% if section.content %}
+  {% if section_content %}
   <div class="prose">
-    {{ section.content | safe }}
+    {{ section_content | safe }}
   </div>
   {% endif %}
 
-  <div class="post-list">
+  <div class="post-list{% if not section_content %} post-list--flush{% endif %}">
     {% for entry in paginator.pages %}
     <article class="post-list__item">
       {% if entry.date %}
