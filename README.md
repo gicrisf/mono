@@ -39,6 +39,9 @@ Theme behavior lives under `[extra]`.
 [extra]
 logo_text = "mono"
 logo_home_link = "/"
+logo_image = "logo/logo.png"
+favicon = "logo/favicon.ico"
+apple_touch_icon = "logo/apple-touch-icon.png"
 github_url = "https://github.com/gicrisf/mono"
 compact_nav = true
 
@@ -53,6 +56,8 @@ copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE"
 ```
 
 The optional `section` value on a menu entry marks the entry as current when `current_path` starts with the entry URL. If it is omitted, the entry is never marked as current. Set `trailing_slash = false` for file URLs such as the feed.
+
+Set `logo_image` to show a square image before the logo text. The image is decorative; the link and wordmark provide the accessible name. `favicon` sets the main icon and `apple_touch_icon` adds the Apple touch icon link. All three paths are relative to `static/`.
 
 Set `compact_nav = true` to collapse the navigation into the Menu toggle at every width. It is especially useful for blog-only sites that do not need a permanent navigation row. The collapsed state requires JavaScript; without it the navigation renders as a wrapped row.
 

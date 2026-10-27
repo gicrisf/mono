@@ -41,6 +41,10 @@
 <link rel="icon" href="{{ get_url(path=config.extra.favicon) }}">
 {% endif %}
 
+{% if config.extra.apple_touch_icon %}
+<link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path=config.extra.apple_touch_icon) }}">
+{% endif %}
+
 <link rel="preload" as="font" href="{{ get_url(path='fonts/ibm-plex-mono-latin-400-normal.woff2') }}" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
 
