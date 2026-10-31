@@ -53,6 +53,10 @@ github_url = "https://github.com/gicrisf/mono"
 # Documentation section used by the docs layout.
 docs_section = "docs"
 
+# "all" shows the full docs tree; "subsection" scopes it to the
+# current top-level docs subsection.
+docs_scope = "all"
+
 # Optional page action shown on documentation pages.
 edit_page = false
 docs_repo = "https://github.com/gicrisf/mono"

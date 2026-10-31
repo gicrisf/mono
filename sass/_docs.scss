@@ -326,3 +326,21 @@
     display: block;
   }
 }
+
+.docs-back {
+  border-top: 1px dotted var(--color-rule);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-sm);
+
+  a {
+    color: var(--color-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+  }
+}

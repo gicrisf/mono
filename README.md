@@ -102,7 +102,7 @@ sort_by = "weight"
 +++
 ```
 
-Set `docs_section = "docs"` under `[extra]`; the sidebar and pager use that section. The sidebar lists every subsection under the docs root. The article outline appears when a page has a table of contents.
+Set `docs_section = "docs"` under `[extra]`; the sidebar and pager use that section. By default the sidebar lists every subsection under the docs root. Set `docs_scope = "subsection"` to scope the sidebar and pager to the current top-level subsection, which is useful when each project owns a docs subtree. The article outline appears when a page has a table of contents.
 
 Optional page actions can point at the repository that contains the docs:
 

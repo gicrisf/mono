@@ -1,6 +1,18 @@
 {% extends "index.html" %}
 
 {% block main %}
+{% set docs_section_name = config.extra.docs_section | default(value="docs") %}
+{% set docs_scope = config.extra.docs_scope | default(value="all") %}
+{% set docs_root = false %}
+{% if docs_scope == "subsection" %}
+{% set docs_root_section = get_section(path=docs_section_name ~ "/_index.md") %}
+{% for path in docs_root_section.subsections %}
+{% set candidate = get_section(path=path) %}
+{% if current_path is starting_with(pat=candidate.path) %}
+{% set_global docs_root = candidate %}
+{% endif %}
+{% endfor %}
+{% endif %}
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="{{ config.base_url }}">Home</a>
   <span aria-hidden="true">/</span>
