@@ -12,7 +12,7 @@
         <a
           class="docs-link"
           href="{{ scoped_root.permalink }}"
-          {% if current == scoped_root.permalink %}aria-current="page"{% endif %}
+          {% if current == scoped_root.path %}aria-current="page"{% endif %}
         >Overview</a>
       </li>
       {{<docs.items section={scoped_root} current={current} />}}

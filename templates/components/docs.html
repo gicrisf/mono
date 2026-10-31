@@ -13,7 +13,7 @@
   <a
     class="docs-link"
     href="{{ entry.permalink }}"
-    {% if entry.permalink == current %}aria-current="page"{% endif %}
+    {% if entry.path == current %}aria-current="page"{% endif %}
   >{{ entry.title }}</a>
 </li>
 {% endfor %}
