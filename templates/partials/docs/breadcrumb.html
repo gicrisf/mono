@@ -1,4 +1,7 @@
 <nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ config.base_url }}">Home</a>
+  <span aria-hidden="true">/</span>
+
   {% for path in page.ancestors %}
   {% set ancestor = get_section(path=path) %}
   {% if ancestor.path != "/" %}

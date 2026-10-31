@@ -1,4 +1,6 @@
 {% set top = page.extra.top | default(value=false) %}
+{% set docs_section = config.extra.docs_section | default(value="docs") %}
+{% set docs_root = get_section(path=docs_section ~ "/_index.md") %}
 {% set previous = page.lower %}
 {% set next = page.higher %}
 
@@ -30,7 +32,7 @@
 {% endif %}
 {% elif parent.pages %}
 {% set previous = parent.pages | last %}
-{% else %}
+{% elif parent.path != docs_root.path %}
 {% set grandparent = get_section(path=parent.ancestors | reverse | first) %}
 {% set_global candidate = none %}
 {% set_global previous_section = none %}
@@ -104,7 +106,7 @@
 {% endif %}
 {% endfor %}
 
-{% if not next %}
+{% if not next and parent.path != docs_root.path %}
 {% set grandparent = get_section(path=parent.ancestors | reverse | first) %}
 {% set_global found_parent = false %}
 {% for path in grandparent.subsections %}
