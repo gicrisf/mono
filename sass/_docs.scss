@@ -344,3 +344,29 @@
     }
   }
 }
+
+.docs-adapted {
+  background: var(--color-tint);
+  border: 1px dotted var(--color-rule);
+  margin-block: var(--space-lg);
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-md);
+
+  p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+}
+
+.docs-adapted__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-xs) !important;
+  text-transform: uppercase;
+}

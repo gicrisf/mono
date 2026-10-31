@@ -46,6 +46,9 @@
       {% endif %}
     </header>
 
+    {% set adapted = section.extra %}
+    {% include "partials/docs/adapted.html" %}
+
     {% if section.content %}
     <div class="prose">
       {{ section.content | safe }}

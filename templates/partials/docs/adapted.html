@@ -1,0 +1,12 @@
+{% if adapted.adapted_from %}
+<aside class="docs-adapted" role="note">
+  <p class="docs-adapted__label">Adapted from {{ adapted.adapted_from }}</p>
+  <p>
+    Adapted from the
+    <a href="{{ adapted.adapted_url | default(value='https://ox-hugo.scripter.co/') }}">{{ adapted.adapted_from }} documentation</a>
+    by Kaushal Modi, licensed under
+    <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+    This version is updated for ox-zola and Zola 0.23. View the original page for the Hugo-specific version.
+  </p>
+</aside>
+{% endif %}
