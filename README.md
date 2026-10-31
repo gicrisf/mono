@@ -1,6 +1,6 @@
 # mono
 
-A blog theme for [Zola](https://www.getzola.org/), styled as a printed catalog. The layout is inspired by the Ondine documentation site, with a paper sheet, boxed navigation, dotted rules, hard shadows, and monospace labels.
+A documentation and blog theme for [Zola](https://www.getzola.org/), styled as a printed catalog. The layout is inspired by the Ondine documentation site, with a paper sheet, boxed navigation, dotted rules, hard shadows, and monospace labels.
 
 ## Requirements
 
@@ -87,6 +87,31 @@ home_image_caption = "jelly"
 ```
 
 `home_image` replaces the default diagram in the hero with a raster image. The theme renders a responsive `srcset` and shows `home_image_caption` below the image when present. Omit the image to keep the diagram.
+
+## Documentation Content
+
+Docs use the same section/page split as the blog, with the documentation templates and a sidebar, article, and on-page outline.
+
+```toml
++++
+title = "Docs"
+description = "Install and configure the project."
+template = "docs/section.html"
+page_template = "docs/page.html"
+sort_by = "weight"
++++
+```
+
+Set `docs_section = "docs"` under `[extra]`; the sidebar and pager use that section. The sidebar lists every subsection under the docs root. The article outline appears when a page has a table of contents.
+
+Optional page actions can point at the repository that contains the docs:
+
+```toml
+[extra]
+edit_page = true
+docs_repo = "https://github.com/you/your-site"
+repo_branch = "main"
+```
 
 ## Blog Content
 

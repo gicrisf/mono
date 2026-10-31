@@ -1,0 +1,32 @@
+{% component docs.group(section, current) %}
+<section class="docs-group">
+  <h2 class="docs-group__title">{{ section.title }}</h2>
+  <ul class="docs-links">
+    {{<docs.items section={section} current={current} />}}
+  </ul>
+</section>
+{% endcomponent docs.group %}
+
+{% component docs.items(section, current) %}
+{% for entry in section.pages %}
+<li>
+  <a
+    class="docs-link"
+    href="{{ entry.permalink }}"
+    {% if entry.permalink == current %}aria-current="page"{% endif %}
+  >{{ entry.title }}</a>
+</li>
+{% endfor %}
+
+{% for path in section.subsections %}
+{% set subsection = get_section(path=path) %}
+<li class="docs-topic">
+  <details {% if current is starting_with(pat=subsection.path) %}open{% endif %}>
+    <summary class="docs-topic__summary">{{ subsection.title }}</summary>
+    <ul class="docs-links docs-links--nested">
+      {{<docs.items section={subsection} current={current} />}}
+    </ul>
+  </details>
+</li>
+{% endfor %}
+{% endcomponent docs.items %}

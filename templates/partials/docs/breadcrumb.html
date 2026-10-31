@@ -1,0 +1,12 @@
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {% for path in page.ancestors %}
+  {% set ancestor = get_section(path=path) %}
+  {% if ancestor.path != "/" %}
+  <a href="{{ ancestor.permalink }}">{{ ancestor.title }}</a>
+  <span aria-hidden="true">/</span>
+  {% endif %}
+  {% endfor %}
+  <span aria-current="page">{{ page.title }}</span>
+</nav>
+
+<hr class="halftone">

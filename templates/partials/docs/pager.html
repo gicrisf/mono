@@ -1,0 +1,152 @@
+{% set top = page.extra.top | default(value=false) %}
+{% set previous = page.lower %}
+{% set next = page.higher %}
+
+{% if not previous and not top %}
+{% set index = get_section(path=page.ancestors | reverse | first) %}
+{% set parent = get_section(path=index.ancestors | reverse | first) %}
+{% set_global candidate = none %}
+{% set_global previous_section = none %}
+{% for path in parent.subsections %}
+{% set subsection = get_section(path=path) %}
+{% if subsection.permalink == index.permalink %}
+{% set_global previous_section = candidate %}
+{% break %}
+{% endif %}
+{% set_global candidate = subsection %}
+{% endfor %}
+
+{% if previous_section %}
+{% if previous_section.pages %}
+{% set previous = previous_section.pages | last %}
+{% elif previous_section.subsections %}
+{% for path in previous_section.subsections | reverse %}
+{% set child = get_section(path=path) %}
+{% if not previous and child.pages %}
+{% set_global previous = child.pages | last %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% elif parent.pages %}
+{% set previous = parent.pages | last %}
+{% else %}
+{% set grandparent = get_section(path=parent.ancestors | reverse | first) %}
+{% set_global candidate = none %}
+{% set_global previous_section = none %}
+{% for path in grandparent.subsections %}
+{% set subsection = get_section(path=path) %}
+{% if subsection.permalink == parent.permalink %}
+{% set_global previous_section = candidate %}
+{% break %}
+{% endif %}
+{% set_global candidate = subsection %}
+{% endfor %}
+{% if previous_section %}
+{% if previous_section.pages %}
+{% set previous = previous_section.pages | last %}
+{% elif previous_section.subsections %}
+{% for path in previous_section.subsections | reverse %}
+{% set child = get_section(path=path) %}
+{% if not previous and child.pages %}
+{% set_global previous = child.pages | last %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if not next %}
+{% set index = get_section(path=page.ancestors | reverse | first) %}
+
+{% if index.subsections %}
+{% for path in index.subsections %}
+{% set child = get_section(path=path) %}
+{% if not next and child.pages %}
+{% set_global next = child.pages | first %}
+{% break %}
+{% elif not next and child.subsections %}
+{% for childpath in child.subsections %}
+{% set grandchild = get_section(path=childpath) %}
+{% if grandchild.pages %}
+{% set_global next = grandchild.pages | first %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if next %}{% break %}{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if not next %}
+{% set parent = get_section(path=index.ancestors | reverse | first) %}
+{% set_global found_index = false %}
+{% for path in parent.subsections %}
+{% set subsection = get_section(path=path) %}
+{% if found_index and not next %}
+{% if subsection.pages %}
+{% set_global next = subsection.pages | first %}
+{% break %}
+{% elif subsection.subsections %}
+{% for childpath in subsection.subsections %}
+{% set child = get_section(path=childpath) %}
+{% if child.pages %}
+{% set_global next = child.pages | first %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if next %}{% break %}{% endif %}
+{% endif %}
+{% elif subsection.permalink == index.permalink %}
+{% set_global found_index = true %}
+{% endif %}
+{% endfor %}
+
+{% if not next %}
+{% set grandparent = get_section(path=parent.ancestors | reverse | first) %}
+{% set_global found_parent = false %}
+{% for path in grandparent.subsections %}
+{% set subsection = get_section(path=path) %}
+{% if found_parent and not next %}
+{% if subsection.pages %}
+{% set_global next = subsection.pages | first %}
+{% break %}
+{% elif subsection.subsections %}
+{% for childpath in subsection.subsections %}
+{% set child = get_section(path=childpath) %}
+{% if child.pages %}
+{% set_global next = child.pages | first %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if next %}{% break %}{% endif %}
+{% endif %}
+{% elif subsection.permalink == parent.permalink %}
+{% set_global found_parent = true %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+{% if previous or next %}
+<nav class="docs-pager" aria-label="Documentation pages">
+  {% if previous %}
+  <a class="docs-pager__link" href="{{ previous.permalink }}">
+    <span class="docs-pager__direction">← Previous</span>
+    {{ previous.title }}
+  </a>
+  {% else %}
+  <span></span>
+  {% endif %}
+
+  {% if next %}
+  <a class="docs-pager__link docs-pager__link--next" href="{{ next.permalink }}">
+    <span class="docs-pager__direction">Next →</span>
+    {{ next.title }}
+  </a>
+  {% endif %}
+</nav>
+{% endif %}

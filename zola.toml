@@ -2,7 +2,7 @@
 base_url = "/"
 
 title = "mono"
-description = "A blog theme for Zola, styled as a printed catalog."
+description = "A documentation and blog theme for Zola, styled as a printed catalog."
 
 default_language = "en"
 
@@ -42,12 +42,21 @@ compact_nav = true
 # Top-level navigation. `section` marks the entry as current when the path starts with its URL.
 # Set `trailing_slash = false` for file URLs such as the feed.
 main_menu = [
+  # {url = "/docs/", name = "Docs", section = "docs"},
   {url = "/blog/", name = "Blog", section = "blog"},
   {url = "/tags/", name = "Tags", section = "tags"},
   {url = "/categories/", name = "Categories", section = "categories"},
 ]
 
 github_url = "https://github.com/gicrisf/mono"
+
+# Documentation section used by the docs layout.
+docs_section = "docs"
+
+# Optional page action shown on documentation pages.
+edit_page = false
+docs_repo = "https://github.com/gicrisf/mono"
+repo_branch = "main"
 
 # Footer contents, rendered as HTML.
 copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE">MIT License</a>'

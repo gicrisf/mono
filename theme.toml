@@ -1,5 +1,5 @@
 name = "mono"
-description = "A blog theme for Zola, styled as a printed catalog."
+description = "A documentation and blog theme for Zola, styled as a printed catalog."
 license = "MIT"
 homepage = "https://github.com/gicrisf/mono"
 demo = "https://example.com"
