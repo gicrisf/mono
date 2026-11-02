@@ -33,9 +33,55 @@
 {% if page is defined and page.updated %}
 <meta property="article:modified_time" content="{{ page.updated }}">
 {% endif %}
-<meta name="twitter:card" content="summary">
+
+{% set og_dir = config.extra.og_image_dir | default(value="og") %}
+{% set og_default = config.extra.og_default_image | default(value=og_dir ~ "/default.png") %}
+{% set_global og_image_path = og_default %}
+{% set_global og_image_alt = page_title %}
+{% if page is defined %}
+  {% set og_override = page.extra.og_image | default(value="") %}
+  {% set og_alt = page.extra.og_image_alt | default(value="") %}
+  {% if og_alt %}
+    {% set_global og_image_alt = og_alt %}
+  {% endif %}
+  {% if og_override %}
+    {% set_global og_image_path = og_override %}
+  {% elif page.path == "/" %}
+    {% set_global og_image_path = og_dir ~ "/home.png" %}
+  {% else %}
+    {% set og_key = page.path | trim_start(pat="/") | trim_end(pat="/") %}
+    {% set_global og_image_path = og_dir ~ "/" ~ og_key ~ ".png" %}
+  {% endif %}
+{% elif section is defined %}
+  {% set og_override = section.extra.og_image | default(value="") %}
+  {% set og_alt = section.extra.og_image_alt | default(value="") %}
+  {% if og_alt %}
+    {% set_global og_image_alt = og_alt %}
+  {% endif %}
+  {% if og_override %}
+    {% set_global og_image_path = og_override %}
+  {% elif section.path == "/" %}
+    {% set_global og_image_path = og_dir ~ "/home.png" %}
+  {% else %}
+    {% set og_key = section.path | trim_start(pat="/") | trim_end(pat="/") %}
+    {% set_global og_image_path = og_dir ~ "/" ~ og_key ~ ".png" %}
+  {% endif %}
+{% endif %}
+{% if og_image_path is starting_with(pat="http://") or og_image_path is starting_with(pat="https://") %}
+  {% set_global og_image_url = og_image_path %}
+{% else %}
+  {% set_global og_image_url = get_url(path=og_image_path | trim_start(pat="/")) %}
+{% endif %}
+<meta property="og:image" content="{{ og_image_url }}">
+<meta property="og:image:alt" content="{{ og_image_alt }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }}">
 <meta name="twitter:description" content="{{ description }}">
+<meta name="twitter:image" content="{{ og_image_url }}">
+<meta name="twitter:image:alt" content="{{ og_image_alt }}">
 
 {% if config.extra.favicon %}
 <link rel="icon" href="{{ get_url(path=config.extra.favicon) }}">

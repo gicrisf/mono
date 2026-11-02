@@ -58,6 +58,26 @@ The optional `section` value on a menu entry marks the entry as current when `cu
 
 `favicon` sets the main icon and `apple_touch_icon` adds the Apple touch icon link. Both paths are relative to `static/`.
 
+## Social preview images
+
+The theme emits `og:image` and `twitter:image` metadata for every page. By default it looks for a generated PNG at `og/<page.path>.png` and falls back to `og/default.png`.
+
+```toml
+[extra]
+og_image_dir = "og"
+og_default_image = "og/default.png"
+```
+
+The home page uses `og/home.png`; section and page paths map directly to nested files, such as `og/projects/example/getting-started.png`. A page or section can override the generated card:
+
+```toml
+[extra]
+og_image = "covers/custom.png"
+og_image_alt = "A custom preview"
+```
+
+External image URLs are used as-is. Generated images are site build artifacts, not theme assets.
+
 Set `compact_nav = true` to collapse the navigation into the Menu toggle at every width. It is especially useful for blog-only sites that do not need a permanent navigation row. The collapsed state requires JavaScript; without it the navigation renders as a wrapped row.
 
 Enable Zola's search index in the site configuration.

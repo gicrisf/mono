@@ -68,5 +68,11 @@ copyright = 'mono · <a href="https://github.com/gicrisf/mono/blob/main/LICENSE"
 # Optional custom CSS placed in static/.
 # custom_css = "custom.css"
 
+# Social preview images. The theme looks for og/<page.path>.png and falls
+# back to og_default_image. A page can override both with `og_image` and
+# `og_image_alt` under [extra].
+og_image_dir = "og"
+og_default_image = "og/default.png"
+
 # Optional favicon placed in static/.
 favicon = "favicon.svg"
