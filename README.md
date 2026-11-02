@@ -284,7 +284,7 @@ math = true
 +++
 ```
 
-KaTeX 0.19.1 is vendored under `static/assets/katex/`, so no CDN or build step is required. Pages without the flag load no KaTeX CSS or JavaScript.
+KaTeX 0.18.5 is vendored under `static/assets/katex/`, so no CDN or build step is required. Pages without the flag load no KaTeX CSS or JavaScript.
 
 Inline math uses `$...$`; display math uses `$$...$$`. Fenced code blocks are ignored. Keep currency-like prose away from paired dollar signs, which the renderer treats as math. Search indexes and feeds keep the raw LaTeX source.
 
@@ -344,7 +344,7 @@ sass/
   _search.scss            search panel
 static/
   assets/js/              progressive enhancement scripts
-  assets/katex/           KaTeX 0.19.1 styles, scripts, and fonts
+  assets/katex/           KaTeX 0.18.5 styles, scripts, and fonts
   fonts/                  self-hosted IBM Plex Mono
 ```
 
